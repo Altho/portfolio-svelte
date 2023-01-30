@@ -22,7 +22,7 @@
 
 
     onMount(async () => {
-        const {data} = await supabase.from("proficiencies").select("id, name, content, img, color");
+        const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
         proficienciesStore.set(data as Proficiency[]);
     })
 
@@ -32,7 +32,7 @@
 
 <section>
     <div class="container"
-         use:inview={{ unobserveOnEnter: false, rootMargin: '-40%' }}
+         use:inview={{ unobserveOnEnter: false,  }}
          on:change={({ detail }) => {
     isInView = detail.inView;
   }}
@@ -53,12 +53,10 @@
 <style lang="scss">
   .container {
     width: 100%;
-    height: 100vh;
     padding: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    align-items: flex-start;
     gap: 20px;
   }
 

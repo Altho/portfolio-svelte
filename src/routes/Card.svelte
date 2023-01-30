@@ -2,6 +2,7 @@
     import {fade} from 'svelte/transition';
     import {tweened} from "svelte/motion";
     import {cubicOut} from "svelte/easing";
+
     export let prof;
 
     console.log(prof)
@@ -19,10 +20,14 @@
     <div class="card" on:mouseenter={() => toX.set(-50)} on:mouseleave={() => toX.set(0)}>
 
         <div class="left-side">
+            <div class="text">
             Content: {prof.content}
+            </div>
         </div>
-        <div class="right-side" style="background-color: {prof.color};">
-            {prof.name}
+        <div class="right-side" style="background-color: {prof.color};;">
+            <div class="name-container">
+                {prof.name}
+            </div>
 
         </div>
     </div>
@@ -49,27 +54,68 @@
 
   .card {
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     display: flex;
+    height: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
   }
 
   .card:hover {
     cursor: pointer;
-    scale:1.05;
-    transition: all 0.2s ease-in-out;
+
+    .right-side {
+      width:20%;
+      transition: all 0.2s ease-in-out;
+    }
+    .text {
+      font-size: 0.95em;
+      transition: all 0.2s ease-in-out;
+
+    }
 
   }
 
   .left-side {
     padding: 20px;
+    border-radius: 10px;
     background-color: white;
     width: 70%;
   }
 
+  .name-container {
+    font-weight: bold;
+    color:white;
+    display: flex;
+    font-size: 1.2em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .name-container::after {
+    content:'';
+    margin-left: 10px;
+    border-bottom: 5px solid white;
+    width:100%;
+  }
+
+  .text {
+    height:150px;;
+    overflow: hidden;
+    font-size: 1.05em;
+    transition: all 0.2s ease-in-out;
+
+
+  }
+
   .right-side {
     padding: 20px;
-    width: 30%;
+    width: 60%;
     border-radius: 0 10px 10px 0;
+    box-shadow: -9px 0px 14px -4px rgba(0,0,0,0.86);
+    transition: all 0.2s ease-in-out;
+
   }
 
   @media (max-width: 900px) {
