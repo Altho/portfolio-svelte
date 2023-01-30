@@ -1,2 +1,16 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import Welcome from "./Welcome.svelte";
+    import Intro from "./Intro.svelte";
+    import Proficiencies from "./Proficiencies.svelte";
+
+</script>
+
+<svelte:head>
+    <title>Altho</title>
+    <meta name="description" content="Alan Thomas portfolio" />
+</svelte:head>
+
+<Welcome />
+<Intro />
+<Proficiencies />
+
