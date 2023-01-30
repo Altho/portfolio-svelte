@@ -13,13 +13,13 @@
                 <a href="/">About</a>
             </li>
             <li aria-current={$page.url.pathname === '/projects' ? 'page' : undefined}>
-                <a href="/about">Projects</a>
+                <a href="/">Projects</a>
             </li>
             <li aria-current={$page.url.pathname.startsWith('/resume') ? 'page' : undefined}>
-                <a href="/sverdle">Resume</a>
+                <a href="/">Resume</a>
             </li>
             <li aria-current={$page.url.pathname.startsWith('/contact') ? 'page' : undefined}>
-                <a href="/sverdle">Contact</a>
+                <a href="/">Contact</a>
             </li>
         </ul>
         <svg viewBox="0 0 2 3" aria-hidden="true">
@@ -33,12 +33,16 @@
     header {
         display: flex;
         justify-content: space-between;
+        position: sticky;
+        top:0;
+
     }
 
 
     nav {
         display: flex;
         justify-content: center;
+
         --background: rgba(255, 255, 255, 0.7);
     }
 
