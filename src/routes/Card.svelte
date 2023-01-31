@@ -5,23 +5,24 @@
 
     export let prof;
 
-    console.log(prof)
 
     const toX = tweened(0, {
         duration: 400,
         easing: cubicOut,
     });
 
+
+
 </script>
 
 
-<div class="card-container" transition:fade={{duration: 1000 }}>
+<div class="card-container">
 
-    <div class="card" on:mouseenter={() => toX.set(-50)} on:mouseleave={() => toX.set(0)}>
+    <div class="card"  on:mouseenter={() => toX.set(-50)} on:mouseleave={() => toX.set(0)}>
 
         <div class="left-side">
             <div class="text">
-            Content: {prof.content}
+                Content: {prof.content}
             </div>
         </div>
         <div class="right-side" style="background-color: {prof.color};;">
@@ -31,7 +32,9 @@
 
         </div>
     </div>
-    <img alt="proficiency logo" class="main-image" style="{prof.id%2 !== 0 ? `top:50%;  transform: translate(${$toX-50}%, -50%);` : `top:50%; right:0;  transform: translate(${Math.abs($toX)+50}%, -50%);`}" src={prof.img}/>
+    <img alt="proficiency logo" class="main-image"
+         style="{prof.id%2 !== 0 ? `top:50%;  transform: translate(${$toX-50}%, -50%);` : `top:50%; right:0;  transform: translate(${Math.abs($toX)+50}%, -50%);`}"
+         src={prof.img}/>
 
 </div>
 
@@ -42,6 +45,7 @@
   .card-container {
     position: relative;
     width: 40%;
+
 
   }
 
@@ -57,8 +61,7 @@
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     display: flex;
     height: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    transition: all 0.2s ease-in-out;
 
   }
 
@@ -66,11 +69,12 @@
     cursor: pointer;
 
     .right-side {
-      width:20%;
+      width: 20%;
       transition: all 0.2s ease-in-out;
     }
+
     .text {
-      font-size: 0.95em;
+      overflow: scroll;
       transition: all 0.2s ease-in-out;
 
     }
@@ -86,7 +90,7 @@
 
   .name-container {
     font-weight: bold;
-    color:white;
+    color: white;
     display: flex;
     font-size: 1.2em;
     justify-content: center;
@@ -94,14 +98,14 @@
   }
 
   .name-container::after {
-    content:'';
+    content: '';
     margin-left: 10px;
     border-bottom: 5px solid white;
-    width:100%;
+    width: 100%;
   }
 
   .text {
-    height:150px;;
+    height: 150px;;
     overflow: hidden;
     font-size: 1.05em;
     transition: all 0.2s ease-in-out;
@@ -113,17 +117,17 @@
     padding: 20px;
     width: 60%;
     border-radius: 0 10px 10px 0;
-    box-shadow: -9px 0px 14px -4px rgba(0,0,0,0.86);
+    box-shadow: -9px 0px 14px -4px rgba(0, 0, 0, 0.86);
     transition: all 0.2s ease-in-out;
 
   }
 
   @media (max-width: 900px) {
     .card-container {
-      width:100%;
+      width: 100%;
     }
     .card:hover {
-      scale:1;
+      scale: 1;
 
     }
   }
