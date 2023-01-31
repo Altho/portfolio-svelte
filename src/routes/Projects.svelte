@@ -2,52 +2,54 @@
   import {supabase} from "../lib/client";
   import {onMount} from "svelte";
   import {writable} from "svelte/store";
-  import Card from "./Card.svelte";
   import {swipe} from 'svelte-gestures';
   import Title from "./Title.svelte";
+  import Project from "./Project.svelte";
 
   type Proficiency = {
     id: number,
     name: string,
     content: string,
-    color: string,
-    img: string
+    url: string,
+    image: string
   }
 
   let startIndex = 0;
-  let endIndex = 4;
+  let endIndex = 2;
   let storeLength;
 
-  const proficienciesStore = writable<Proficiency[]>([]);
-  const proficiencies = [];
+  const projects = [];
   const displayed = writable<Proficiency[]>([]);
 
 
   function prev() {
-    if (storeLength < 4) return;
+    if (storeLength < 2) return;
 
-    if (endIndex === 4) {
-      const ceiling = Math.ceil(storeLength / 4) * 4
-      startIndex = ceiling - 4;
+    if (endIndex === 2) {
+      const ceiling = Math.ceil(storeLength / 2) * 2
+      startIndex = ceiling - 2;
       endIndex = ceiling;
-      displayed.set(proficiencies.slice(startIndex, endIndex));
+      displayed.set(projects.slice(startIndex, endIndex));
     } else {
-      startIndex -= 4;
-      endIndex -= 4;
-      displayed.set(proficiencies.slice(startIndex, endIndex));
+      startIndex -= 2;
+      endIndex -= 2;
+      displayed.set(projects.slice(startIndex, endIndex));
     }
   }
 
   function next() {
 
-    if (storeLength < 4) return;
-    startIndex = (startIndex + 4);
-    endIndex = (endIndex + 4);
-    displayed.set(proficiencies.slice(startIndex, endIndex));
-    if (startIndex > storeLength) {
+    if (storeLength < 2) return;
+    console.log(startIndex, endIndex, storeLength)
+    startIndex = (startIndex + 2);
+    endIndex = (endIndex + 2);
+    displayed.set(projects.slice(startIndex, endIndex));
+    console.log(startIndex, endIndex, storeLength)
+
+    if (endIndex > storeLength) {
       startIndex = 0;
-      endIndex = 4;
-      displayed.set(proficiencies.slice(startIndex, endIndex));
+      endIndex = 2;
+      displayed.set(projects.slice(startIndex, endIndex));
 
     }
 
@@ -55,10 +57,10 @@
   }
 
   onMount(async () => {
-    const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
-    proficiencies.push(...(data as Proficiency[]));
-    storeLength = proficiencies.length;
-    displayed.set(proficiencies.slice(startIndex, endIndex));
+    const {data} = await supabase.from("projects").select("id, name, content, image, url").order('id');
+    projects.push(...(data as Proficiency[]));
+    storeLength = projects.length;
+    displayed.set(projects.slice(startIndex, endIndex));
   });
 
 
@@ -71,13 +73,13 @@
     prev();
   }
 }}>
-    <Title>PROFICIENCIES</Title>
+    <Title>PROJECTS</Title>
     <div class="frame">
         <div class="container">
             <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
 
-            {#each $displayed as prof (prof.id)}
-                <Card prof={prof}/>
+            {#each $displayed as proj (proj.id)}
+                <Project projects={proj} />
             {/each}
             <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
 
@@ -101,7 +103,7 @@
   .frame {
     display: flex;
     position: relative;
-    height: 80vh;
+    height: 100vh;
 
     button {
       position: absolute;

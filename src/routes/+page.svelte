@@ -2,6 +2,7 @@
     import Welcome from "./Welcome.svelte";
     import Intro from "./Intro.svelte";
     import Proficiencies from "./Proficiencies.svelte";
+    import Projects from "./Projects.svelte";
 
 </script>
 
@@ -13,4 +14,5 @@
 <Welcome />
 <Intro />
 <Proficiencies />
+<Projects />
 

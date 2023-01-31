@@ -1,5 +1,5 @@
 <script>
-    import {fade} from 'svelte/transition';
+    import {fly} from 'svelte/transition';
     import {tweened} from "svelte/motion";
     import {cubicOut} from "svelte/easing";
 
@@ -16,8 +16,7 @@
 </script>
 
 
-<div class="card-container">
-
+<div class="card-container" in:fly={{x:600, duration:400}} >
     <div class="card"  on:mouseenter={() => toX.set(-50)} on:mouseleave={() => toX.set(0)}>
 
         <div class="left-side">
@@ -35,7 +34,6 @@
     <img alt="proficiency logo" class="main-image"
          style="{prof.id%2 !== 0 ? `top:50%;  transform: translate(${$toX-50}%, -50%);` : `top:50%; right:0;  transform: translate(${Math.abs($toX)+50}%, -50%);`}"
          src={prof.img}/>
-
 </div>
 
 
@@ -53,6 +51,7 @@
     height: 100px;
     position: absolute;
     z-index: -1;
+   
 
   }
 
@@ -76,8 +75,8 @@
     .text {
       overflow: scroll;
       transition: all 0.2s ease-in-out;
-
     }
+
 
   }
 
