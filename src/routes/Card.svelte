@@ -1,14 +1,19 @@
 <script>
     import {fly} from 'svelte/transition';
-    import {tweened} from "svelte/motion";
-    import {cubicOut} from "svelte/easing";
+    import {spring, tweened} from "svelte/motion";
+    import {cubicOut, bounceInOut, linear} from "svelte/easing";
 
     export let prof;
 
 
-    const toX = tweened(0, {
-        duration: 400,
-        easing: cubicOut,
+    const toX = spring(0, {
+        stiffness: 0.1,
+        damping: 0.35
+    });
+
+    const panel = tweened(80, {
+        duration: 200,
+        easing: linear,
     });
 
 
@@ -17,14 +22,14 @@
 
 
 <div class="card-container" in:fly={{x:600, duration:400}} >
-    <div class="card"  on:mouseenter={() => toX.set(-50)} on:mouseleave={() => toX.set(0)}>
+    <div class="card"  on:mouseenter={() => {toX.set(-50); panel.set(20)}} on:mouseleave={() => {toX.set(0); panel.set(80)}}>
 
         <div class="left-side">
             <div class="text">
                 Content: {prof.content}
             </div>
         </div>
-        <div class="right-side" style="background-color: {prof.color};;">
+        <div class="right-side" style="background-color: {prof.color}; width:{$panel}%">
             <div class="name-container">
                 {prof.name}
             </div>
@@ -51,7 +56,7 @@
     height: 100px;
     position: absolute;
     z-index: -1;
-   
+
 
   }
 
@@ -67,10 +72,7 @@
   .card:hover {
     cursor: pointer;
 
-    .right-side {
-      width: 20%;
-      transition: all 0.2s ease-in-out;
-    }
+
 
     .text {
       overflow: scroll;
@@ -82,8 +84,9 @@
 
   .left-side {
     padding: 20px;
-    border-radius: 10px;
-    background-color: white;
+    border-radius: 10px 0 0 10px;
+    color: white;
+    background-color: #0D1821;
     width: 70%;
   }
 

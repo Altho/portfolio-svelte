@@ -3,6 +3,7 @@
     import Intro from "./Intro.svelte";
     import Proficiencies from "./Proficiencies.svelte";
     import Projects from "./Projects.svelte";
+    import Form from "./Form.svelte";
 
 </script>
 
@@ -15,4 +16,5 @@
 <Intro />
 <Proficiencies />
 <Projects />
+<Form />
 

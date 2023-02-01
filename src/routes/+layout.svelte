@@ -18,6 +18,12 @@
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
+
+    :root {
+        background-color: #344966;
+
+    }
+
     .app {
         display: flex;
         flex-direction: column;

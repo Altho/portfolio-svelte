@@ -5,26 +5,22 @@
 <header>
 
     <nav>
-        <svg viewBox="0 0 2 3" aria-hidden="true">
-            <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-        </svg>
+
         <ul>
             <li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
                 <a href="/">About</a>
             </li>
-            <li aria-current={$page.url.pathname === '/projects' ? 'page' : undefined}>
-                <a href="/">Projects</a>
-            </li>
             <li aria-current={$page.url.pathname.startsWith('/resume') ? 'page' : undefined}>
                 <a href="/">Resume</a>
+            </li>
+            <li aria-current={$page.url.pathname.startsWith('/resume') ? 'page' : undefined}>
+                <a href="/">Blog</a>
             </li>
             <li aria-current={$page.url.pathname.startsWith('/contact') ? 'page' : undefined}>
                 <a href="/">Contact</a>
             </li>
         </ul>
-        <svg viewBox="0 0 2 3" aria-hidden="true">
-            <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-        </svg>
+
     </nav>
 
 </header>
@@ -35,15 +31,15 @@
         justify-content: space-between;
         position: sticky;
         top:0;
-
     }
 
 
     nav {
         display: flex;
         justify-content: center;
+        color: #fff;
 
-        --background: rgba(255, 255, 255, 0.7);
+
     }
 
     svg {
@@ -52,9 +48,7 @@
         display: block;
     }
 
-    path {
-        fill: var(--background);
-    }
+
 
     ul {
         position: relative;
@@ -74,16 +68,8 @@
         height: 100%;
     }
 
-    li[aria-current='page']::before {
-        --size: 6px;
-        content: '';
-        width: 0;
-        height: 0;
-        position: absolute;
-        top: 0;
-        left: calc(50% - var(--size));
-        border: var(--size) solid transparent;
-        border-top: var(--size) solid var(--color-theme-1);
+    li[aria-current='page'] {
+        border-bottom: 2px solid red;
     }
 
     nav a {
@@ -91,7 +77,7 @@
         height: 100%;
         align-items: center;
         padding: 0 0.5rem;
-        color: var(--color-text);
+        color: #0D1821;
         font-weight: 700;
         font-size: 0.8rem;
         text-transform: uppercase;
