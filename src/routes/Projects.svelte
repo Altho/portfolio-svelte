@@ -21,7 +21,6 @@
   const projects = [];
   const displayed = writable<Proficiency[]>([]);
 
-
   function prev() {
     if (storeLength < 2) return;
 
@@ -61,6 +60,15 @@
     projects.push(...(data as Proficiency[]));
     storeLength = projects.length;
     displayed.set(projects.slice(startIndex, endIndex));
+    for(let proj of projects) {
+      proj.technologies = []
+      const technos = await supabase.from("projtechs").select("techno_id").eq('project_id', proj.id)
+      for (const tech of technos.data) {
+        const usedTech = await supabase.from("technologies").select("id, name, logo").eq('id', tech.techno_id);
+        proj.technologies.push(...usedTech.data)
+        console.log(proj)
+      }
+    }
   });
 
 

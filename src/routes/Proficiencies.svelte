@@ -59,6 +59,10 @@
     proficiencies.push(...(data as Proficiency[]));
     storeLength = proficiencies.length;
     displayed.set(proficiencies.slice(startIndex, endIndex));
+
+
+
+
   });
 
 

@@ -7,33 +7,25 @@
   import {fly} from 'svelte/transition';
   import {supabase} from "$lib/client.ts";
   import {writable} from "svelte/store";
-
-  let technos;
-  const technologies = []
+  console.log(projects)
 
 
-  onMount(async () => {
-    console.log(projects.id)
-    const {data} = await supabase.from("projtechs").select("techno_id").eq('project_id', projects.id);
-    console.log(data)
-    for (const tech of data) {
-      const {data} = await supabase.from("technologies").select("id, name, logo").eq('id', tech.techno_id);
-      technologies.push(...data)
-    }
-    console.log(technologies)
-  });
-  $: technos = technologies;
 
 </script>
 
 
 <div class="card" in:fly={{x:600, duration:400}}>
     <div class="superior" style="background-image: url({projects.image})">
-        {#each technos as tech }
-            lknlknlknlk,mlk,ml,mlk,lk,lk,kl,
-        {/each}
+
 
     </div>
+    {#if projects.technologies}
+        <div class="tech-container">
+            {#each projects.technologies as tech (tech.id)}
+                <img alt="tech logo" src={tech.logo}>
+            {/each}
+        </div>
+    {/if}
     <div class="name">
         {projects.name}
     </div>
@@ -43,6 +35,7 @@
 <style lang="scss">
   .card {
     height: 600px;
+    position: relative;
     width: 350px;
     border-radius: 10px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -62,6 +55,23 @@
     text-orientation: upright;
   }
 
+  .tech-container {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    bottom: 20px;
+    width:100%;
+    height: 70px;
+
+    img {
+      height: 70px;
+      width: 70px;
+      filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+
+    }
+
+  }
+
   .name::after {
     content: '';
     margin-left: 10px;
@@ -70,7 +80,7 @@
   }
 
   .superior {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 64%, 0 80%);
+    clip-path: polygon(0% 0%, 100% 0%, 100%  64%, 0  80%);
     position: relative;
     border-radius: 10px;
     background-position: top;
