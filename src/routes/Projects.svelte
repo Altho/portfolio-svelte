@@ -137,14 +137,13 @@
 
   .container {
     width: 100%;
-    position: absolute;
+    //position: absolute;
     padding: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+
   }
 
   .frame {

@@ -1,93 +1,91 @@
 <script lang="ts">
-  import {supabase} from "../lib/client";
-  import {onMount} from "svelte";
-  import {writable} from "svelte/store";
-  import Card from "./Card.svelte";
-  import {swipe} from 'svelte-gestures';
-  import Title from "./Title.svelte";
-  import {innerWidth} from "../lib/stores";
+    import {supabase} from "../lib/client";
+    import {onMount} from "svelte";
+    import {writable} from "svelte/store";
+    import Card from "./Card.svelte";
+    import {swipe} from 'svelte-gestures';
+    import Title from "./Title.svelte";
+    import {innerWidth} from "../lib/stores";
 
-  type Proficiency = {
-    id: number,
-    name: string,
-    content: string,
-    color: string,
-    img: string
-  }
-
-  let startIndex = 0;
-  let endIndex;
-  let storeLength;
-  let isGoingLeft = false;
-
-  let width;
-  $: width = innerWidth;
-
-
-  const proficienciesStore = writable<Proficiency[]>([]);
-  const proficiencies = [];
-  const displayed = writable<Proficiency[]>([]);
-
-  const itemAmount = () => {
-    if ($width > 1200) {
-      return 4;
-    } else if ($width > 800) {
-      return 3;
-    } else {
-      return 2;
+    type Proficiency = {
+        id: number,
+        name: string,
+        content: string,
+        color: string,
+        img: string
     }
-  }
+
+    let startIndex = 0;
+    let endIndex;
+    let storeLength;
+    let isGoingLeft = false;
+
+    let width;
+    $: width = innerWidth;
 
 
-  function prev() {
-      console.log(isGoingLeft)
-    if (storeLength < itemAmount()) return;
-    isGoingLeft = true;
+    const proficienciesStore = writable<Proficiency[]>([]);
+    const proficiencies = [];
+    const displayed = writable<Proficiency[]>([]);
 
-    if (endIndex === itemAmount()) {
-      const ceiling = Math.ceil(storeLength / itemAmount()) * itemAmount()
-      startIndex = ceiling - itemAmount();
-      endIndex = ceiling;
-      displayed.set(proficiencies.slice(startIndex, endIndex));
-    } else {
-      startIndex -= itemAmount();
-      endIndex -= itemAmount();
-      displayed.set(proficiencies.slice(startIndex, endIndex));
+    const itemAmount = () => {
+        if ($width > 1200) {
+            return 4;
+        } else if ($width > 800) {
+            return 3;
+        } else {
+            return 2;
+        }
     }
-      console.log(isGoingLeft)
 
-  }
 
-  function next() {
-      console.log(isGoingLeft)
+    function prev() {
+        console.log(isGoingLeft)
+        if (storeLength < itemAmount()) return;
+        isGoingLeft = true;
 
-      isGoingLeft = false;
-    if (storeLength < itemAmount()) return;
-    startIndex = (startIndex + itemAmount());
-    endIndex = (endIndex + itemAmount());
-    displayed.set(proficiencies.slice(startIndex, endIndex));
-    if (endIndex > storeLength) {
-      startIndex = 0;
-      endIndex = itemAmount();
-      displayed.set(proficiencies.slice(startIndex, endIndex));
+        if (endIndex === itemAmount()) {
+            const ceiling = Math.ceil(storeLength / itemAmount()) * itemAmount()
+            startIndex = ceiling - itemAmount();
+            endIndex = ceiling;
+            displayed.set(proficiencies.slice(startIndex, endIndex));
+        } else {
+            startIndex -= itemAmount();
+            endIndex -= itemAmount();
+            displayed.set(proficiencies.slice(startIndex, endIndex));
+        }
+        console.log(isGoingLeft)
 
     }
 
-      console.log(isGoingLeft)
+    function next() {
+        console.log(isGoingLeft)
 
-  }
+        isGoingLeft = false;
+        if (storeLength < itemAmount()) return;
+        startIndex = (startIndex + itemAmount());
+        endIndex = (endIndex + itemAmount());
+        displayed.set(proficiencies.slice(startIndex, endIndex));
+        if (endIndex > storeLength) {
+            startIndex = 0;
+            endIndex = itemAmount();
+            displayed.set(proficiencies.slice(startIndex, endIndex));
 
-  onMount(async () => {
-      endIndex = itemAmount();
-    const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
-    proficiencies.push(...(data as Proficiency[]));
-    storeLength = proficiencies.length;
-    displayed.set(proficiencies.slice(startIndex, endIndex));
+        }
+
+        console.log(isGoingLeft)
+
+    }
+
+    onMount(async () => {
+        endIndex = itemAmount();
+        const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
+        proficiencies.push(...(data as Proficiency[]));
+        storeLength = proficiencies.length;
+        displayed.set(proficiencies.slice(startIndex, endIndex));
 
 
-
-
-  });
+    });
 
 
 </script>
@@ -104,23 +102,25 @@
     <div class="frame">
         <div class="container">
             {#if $width > 1200}
-            <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
-
-            {#each $displayed as prof (prof.id)}
-                <Card direction={isGoingLeft} prof={prof}/>
-            {/each}
-            <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
-                {:else}
-                <div class="mobile-buttons">
                 <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
-                <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
+
+                {#each $displayed as prof (prof.id)}
+                    <Card direction={isGoingLeft} prof={prof}/>
+                {/each}
+                <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg">
+                </button>
+            {:else}
+                <div class="mobile-buttons">
+                    <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
+                    <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg">
+                    </button>
                 </div>
 
 
                 {#each $displayed as prof (prof.id)}
                     <Card direction={isGoingLeft} prof={prof}/>
                 {/each}
-                {/if}
+            {/if}
 
 
         </div>
@@ -131,32 +131,31 @@
 
 <style lang="scss">
   section {
-    height:100vh;
+    //height: 100vh;
   }
 
   .container {
     width: 100%;
-    position: absolute;
+    //position: absolute;
     padding: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+
   }
 
   .frame {
     display: flex;
     position: relative;
-    height: 80vh;
+    //height: 80vh;
 
     button {
-      position: absolute;
+     position: absolute;
       width: 50px;
       top: 50%;
-      transform: translatey(-50%);
-      margin-left: -50px;
+        transform: translateY(-50%);
+
       cursor: pointer;
       background-color: transparent;
       border: none;
@@ -209,7 +208,7 @@
   @media (max-width: 900px) {
 
     .container {
-      width:80%;
+      width: 80%;
 
     }
 
