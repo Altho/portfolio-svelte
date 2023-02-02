@@ -150,7 +150,6 @@
   .frame {
     display: flex;
     position: relative;
-    height: 100vh;
 
     button {
       position: absolute;
