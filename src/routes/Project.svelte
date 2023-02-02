@@ -56,7 +56,6 @@
     </div>
     {#if projects.technologies}
 
-
         <div class="tech-container">
             <div class="technologies">
                 {#each projects.technologies as tech (tech.id)}
