@@ -1,7 +1,6 @@
 <script lang="ts">
 
 
-  import {onMount} from "svelte";
 
   export let projects
   import {fly, fade} from 'svelte/transition';
@@ -41,11 +40,10 @@
 
 <div
         class="card"
-
         in:fly={{x:getDirection(), duration:400}}
         on:mouseenter={mouseEnter}
         on:mouseleave={mouseLeaves}
-
+        >
     <div class="superior" style="height:{$y}%; background-image: url({projects.image})" >
 
 
@@ -208,13 +206,24 @@
 
   .card:nth-child(odd):hover {
     .name {
-      transform: translateX(40px);
+      transform: translateX(30px);
     }
   }
 
   .card:nth-child(even):hover {
     .name {
-      transform: translateX(-40px);
+      transform: translateX(-30px);
     }
+  }
+
+  @media (max-width: 900px) {
+
+    .card {
+      height:450px;
+    }
+
+
+
+
   }
 </style>

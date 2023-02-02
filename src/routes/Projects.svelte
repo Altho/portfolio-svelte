@@ -25,7 +25,7 @@
 
 
     const itemAmount = () => {
-        if ($width > 1200) {
+        if ($width > 900) {
             return 2;
         } else {
             return 1;
