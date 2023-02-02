@@ -5,6 +5,7 @@
   import Card from "./Card.svelte";
   import {swipe} from 'svelte-gestures';
   import Title from "./Title.svelte";
+  import {innerWidth} from "../lib/stores";
 
   type Proficiency = {
     id: number,
@@ -15,46 +16,69 @@
   }
 
   let startIndex = 0;
-  let endIndex = 4;
+  let endIndex;
   let storeLength;
+  let isGoingLeft = false;
+
+  let width;
+  $: width = innerWidth;
+
 
   const proficienciesStore = writable<Proficiency[]>([]);
   const proficiencies = [];
   const displayed = writable<Proficiency[]>([]);
 
-
-  function prev() {
-    if (storeLength < 4) return;
-
-    if (endIndex === 4) {
-      const ceiling = Math.ceil(storeLength / 4) * 4
-      startIndex = ceiling - 4;
-      endIndex = ceiling;
-      displayed.set(proficiencies.slice(startIndex, endIndex));
+  const itemAmount = () => {
+    if ($width > 1200) {
+      return 4;
+    } else if ($width > 800) {
+      return 3;
     } else {
-      startIndex -= 4;
-      endIndex -= 4;
-      displayed.set(proficiencies.slice(startIndex, endIndex));
+      return 2;
     }
   }
 
-  function next() {
 
-    if (storeLength < 4) return;
-    startIndex = (startIndex + 4);
-    endIndex = (endIndex + 4);
+  function prev() {
+      console.log(isGoingLeft)
+    if (storeLength < itemAmount()) return;
+    isGoingLeft = true;
+
+    if (endIndex === itemAmount()) {
+      const ceiling = Math.ceil(storeLength / itemAmount()) * itemAmount()
+      startIndex = ceiling - itemAmount();
+      endIndex = ceiling;
+      displayed.set(proficiencies.slice(startIndex, endIndex));
+    } else {
+      startIndex -= itemAmount();
+      endIndex -= itemAmount();
+      displayed.set(proficiencies.slice(startIndex, endIndex));
+    }
+      console.log(isGoingLeft)
+
+  }
+
+  function next() {
+      console.log(isGoingLeft)
+
+      isGoingLeft = false;
+    if (storeLength < itemAmount()) return;
+    startIndex = (startIndex + itemAmount());
+    endIndex = (endIndex + itemAmount());
     displayed.set(proficiencies.slice(startIndex, endIndex));
-    if (startIndex > storeLength) {
+    if (endIndex > storeLength) {
       startIndex = 0;
-      endIndex = 4;
+      endIndex = itemAmount();
       displayed.set(proficiencies.slice(startIndex, endIndex));
 
     }
 
+      console.log(isGoingLeft)
 
   }
 
   onMount(async () => {
+      endIndex = itemAmount();
     const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
     proficiencies.push(...(data as Proficiency[]));
     storeLength = proficiencies.length;
@@ -68,6 +92,7 @@
 
 </script>
 
+
 <section use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: 'pan-y' }} on:swipe={event => {
   if (event.detail.direction === 'left') {
     next();
@@ -78,12 +103,25 @@
     <Title>PROFICIENCIES</Title>
     <div class="frame">
         <div class="container">
+            {#if $width > 1200}
             <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
 
             {#each $displayed as prof (prof.id)}
-                <Card prof={prof}/>
+                <Card direction={isGoingLeft} prof={prof}/>
             {/each}
             <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
+                {:else}
+                <div class="mobile-buttons">
+                <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
+                <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
+                </div>
+
+
+                {#each $displayed as prof (prof.id)}
+                    <Card direction={isGoingLeft} prof={prof}/>
+                {/each}
+                {/if}
+
 
         </div>
     </div>
@@ -104,6 +142,8 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .frame {
@@ -149,6 +189,14 @@
 
   }
 
+  .mobile-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+  }
+
   .arrow-right {
     transform: rotate(180deg);
   }
@@ -156,6 +204,22 @@
   .main {
     font-size: 3rem;
     font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+
+    .container {
+      width:80%;
+
+    }
+
+    .frame {
+      button {
+        position: relative;
+      }
+    }
+
+
   }
 
 </style>

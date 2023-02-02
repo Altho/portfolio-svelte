@@ -32,9 +32,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        left: 50%;
     }
     .main {
         font-size: 3rem;
         font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+
+        .container {
+            width:90%;
+
+        }
+
+
     }
 </style>

@@ -1,75 +1,94 @@
 <script lang="ts">
-  import {supabase} from "../lib/client";
-  import {onMount} from "svelte";
-  import {writable} from "svelte/store";
-  import {swipe} from 'svelte-gestures';
-  import Title from "./Title.svelte";
-  import Project from "./Project.svelte";
+    import {supabase} from "../lib/client";
+    import {onMount} from "svelte";
+    import {writable} from "svelte/store";
+    import {swipe} from 'svelte-gestures';
+    import Title from "./Title.svelte";
+    import Project from "./Project.svelte";
+    import {innerWidth} from "../lib/stores";
 
-  type Proficiency = {
-    id: number,
-    name: string,
-    content: string,
-    url: string,
-    image: string
-  }
-
-  let startIndex = 0;
-  let endIndex = 2;
-  let storeLength;
-
-  const projects = [];
-  const displayed = writable<Proficiency[]>([]);
-
-  function prev() {
-    if (storeLength < 2) return;
-
-    if (endIndex === 2) {
-      const ceiling = Math.ceil(storeLength / 2) * 2
-      startIndex = ceiling - 2;
-      endIndex = ceiling;
-      displayed.set(projects.slice(startIndex, endIndex));
-    } else {
-      startIndex -= 2;
-      endIndex -= 2;
-      displayed.set(projects.slice(startIndex, endIndex));
+    type Proficiency = {
+        id: number,
+        name: string,
+        content: string,
+        url: string,
+        image: string
     }
-  }
 
-  function next() {
+    let startIndex = 0;
+    let endIndex;
+    let storeLength;
+    let isGoingLeft;
 
-    if (storeLength < 2) return;
-    console.log(startIndex, endIndex, storeLength)
-    startIndex = (startIndex + 2);
-    endIndex = (endIndex + 2);
-    displayed.set(projects.slice(startIndex, endIndex));
-    console.log(startIndex, endIndex, storeLength)
+    let width;
+    $: width = innerWidth;
 
-    if (endIndex > storeLength) {
-      startIndex = 0;
-      endIndex = 2;
-      displayed.set(projects.slice(startIndex, endIndex));
 
+    const itemAmount = () => {
+        if ($width > 1200) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 
 
-  }
+    const projects = [];
+    const displayed = writable<Proficiency[]>([]);
 
-  onMount(async () => {
-    const {data} = await supabase.from("projects").select("id, name, content, image, url").order('id');
-    projects.push(...(data as Proficiency[]));
-    storeLength = projects.length;
-    displayed.set(projects.slice(startIndex, endIndex));
-    for(let proj of projects) {
-      proj.technologies = []
-      const technos = await supabase.from("projtechs").select("techno_id").eq('project_id', proj.id)
-      for (const tech of technos.data) {
-        const usedTech = await supabase.from("technologies").select("id, name, logo").eq('id', tech.techno_id);
-        proj.technologies.push(...usedTech.data)
-        console.log(proj)
-      }
+    function prev() {
+        isGoingLeft = false;
+
+        if (storeLength < itemAmount()) return;
+
+        if (endIndex === itemAmount()) {
+            const ceiling = Math.ceil(storeLength / itemAmount()) * itemAmount()
+            startIndex = ceiling - itemAmount();
+            endIndex = ceiling;
+            displayed.set(projects.slice(startIndex, endIndex));
+        } else {
+            startIndex -= itemAmount();
+            endIndex -= itemAmount();
+            displayed.set(projects.slice(startIndex, endIndex));
+        }
     }
-  });
+
+    function next() {
+        isGoingLeft = true;
+
+        if (storeLength < itemAmount()) return;
+        console.log(startIndex, endIndex, storeLength)
+        startIndex = (startIndex + itemAmount());
+        endIndex = (endIndex + itemAmount());
+        displayed.set(projects.slice(startIndex, endIndex));
+        console.log(startIndex, endIndex, storeLength)
+
+        if (endIndex > storeLength) {
+            startIndex = 0;
+            endIndex = itemAmount();
+            displayed.set(projects.slice(startIndex, endIndex));
+
+        }
+
+
+    }
+
+    onMount(async () => {
+        endIndex = itemAmount();
+        const {data} = await supabase.from("projects").select("id, name, content, image, url").order('id');
+        projects.push(...(data as Proficiency[]));
+        storeLength = projects.length;
+        displayed.set(projects.slice(startIndex, endIndex));
+        for (let proj of projects) {
+            proj.technologies = []
+            const technos = await supabase.from("projtechs").select("techno_id").eq('project_id', proj.id)
+            for (const tech of technos.data) {
+                const usedTech = await supabase.from("technologies").select("id, name, logo").eq('id', tech.techno_id);
+                proj.technologies.push(...usedTech.data)
+                console.log(proj)
+            }
+        }
+    });
 
 
 </script>
@@ -81,15 +100,28 @@
     prev();
   }
 }}>
+
+
     <Title>PROJECTS</Title>
     <div class="frame">
         <div class="container">
+            {#if $width > 1200}
             <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
 
             {#each $displayed as proj (proj.id)}
-                <Project projects={proj} />
+                <Project direction={isGoingLeft} projects={proj}/>
             {/each}
             <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
+            {:else}
+
+                <div class=mobile-buttons><button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
+                    <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button></div>
+
+
+                {#each $displayed as proj (proj.id)}
+                    <Project direction={isGoingLeft} projects={proj}/>
+                {/each}
+                {/if}
 
         </div>
     </div>
@@ -100,8 +132,9 @@
 <style lang="scss">
 
   section {
-    height:100vh;
+    height: 100vh;
   }
+
   .container {
     width: 100%;
     position: absolute;
@@ -110,6 +143,8 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .frame {
@@ -122,7 +157,6 @@
       width: 50px;
       top: 50%;
       transform: translatey(-50%);
-      margin-left: -50px;
       cursor: pointer;
       background-color: transparent;
       border: none;
@@ -146,7 +180,7 @@
     }
 
     .right {
-      right: -30px;
+      right: 0;
     }
 
     .left {
@@ -162,6 +196,29 @@
   .main {
     font-size: 3rem;
     font-weight: 700;
+  }
+
+  .mobile-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+
+    .container {
+     width:90%;
+    }
+
+    .frame {
+      button {
+        position: relative;
+      }
+    }
+
+
   }
 
 </style>

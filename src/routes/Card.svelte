@@ -4,6 +4,7 @@
     import {cubicOut, bounceInOut, linear} from "svelte/easing";
 
     export let prof;
+    export let direction;
 
 
     const toX = tweened(0, {
@@ -26,11 +27,19 @@
         panel.set(80);
     }
 
+    const getDirection = () => {
+        if (direction ) {
+            return 600
+        } else {
+            return -600
+        }
+    }
+
 
 </script>
 
 
-<div class="card-container" in:fly={{x:600, duration:400}} >
+<div class="card-container" in:fly={{x:getDirection(), duration:400}} >
     <div class="card"  on:mouseenter={mouseEnter} on:mouseleave={mouseLeave}>
         <div class="left-side">
             <div class="text">

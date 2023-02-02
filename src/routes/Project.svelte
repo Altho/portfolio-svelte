@@ -9,40 +9,54 @@
   import {writable} from "svelte/store";
   import {spring} from "svelte/motion";
   import {cubicOut, bounceInOut} from "svelte/easing";
+  import { tap } from 'svelte-gestures';
+  export let direction;
+
   console.log(projects)
 
 
-  const y = spring(90, {
+  const y = spring(95, {
       stiffness: 0.1,
       damping: 0.35
   });
 
-  let isParagraphVisible = false;
 
   const mouseEnter = () => {
-      y.set(50);
-        isParagraphVisible = true;
+      y.set(5);
   }
 
   const mouseLeaves = () => {
-      y.set(90);
-      isParagraphVisible = false;
+      y.set(95);
+  }
+
+  const getDirection = () => {
+      if (direction ) {
+          return -600
+      } else {
+          return 600
+      }
   }
 
 </script>
 
 
-<div class="card" in:fly={{x:800, duration:400}} on:mouseenter={mouseEnter} on:mouseleave={mouseLeaves}>
+<div
+        class="card"
+        use:tap={{ timeframe: 300 }}
+        in:fly={{x:getDirection(), duration:400}}
+        on:mouseenter={mouseEnter}
+        on:mouseleave={mouseLeaves}
+        on:tap={mouseEnter}>
     <div class="superior" style="height:{$y}%; background-image: url({projects.image})" >
 
 
     </div>
+    <div class="text" >
+        <p>{projects.content}</p>
+    </div>
     {#if projects.technologies}
-        {#if isParagraphVisible}
-            <div class="text" transition:fly={{duration: 100}}>
-                <p>{projects.content}</p>
-            </div>
-        {/if}
+
+
         <div class="tech-container">
             <div class="technologies">
                 {#each projects.technologies as tech (tech.id)}
@@ -52,11 +66,12 @@
 
         </div>
     {/if}
+
     <div class="name">
         {projects.name}
     </div>
+    </div>
 
-</div>
 
 <style lang="scss">
   .card {
@@ -66,6 +81,9 @@
     border-radius: 10px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     background-color: #0D1821;
+    transition: all 0.1s ease-in-out;
+
+
 
   }
 
@@ -80,6 +98,13 @@
     transition: all 0.2s ease-in-out;
     writing-mode: vertical-rl;
     text-orientation: upright;
+  }
+
+  .card:nth-child(odd) {
+    .name {
+      right:0;
+    }
+
   }
 
   .tech-container {
@@ -112,11 +137,34 @@
 
   .text {
     position: absolute;
-    margin-top: -50px;
+    z-index: 0;
+    bottom:80px;
     padding: 20px;
-    max-height: 200px;
+    transition: all 0.2s ease-in-out;
     overflow-x: scroll;
+    max-height: 500px;
     color: white;
+    background: fixed;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    &::after {
+      position: absolute;
+      background-attachment: fixed;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+      content: "";
+      background: linear-gradient(to top,
+              rgb(13, 24, 33) 20%,
+              rgba(255,255,255, 0) 80%
+      ) ;
+
+      pointer-events: none; /* so the text is still selectable */
+    }
+
   }
 
 
@@ -124,20 +172,45 @@
   .superior {
     clip-path: polygon(0% 0%, 100% 0%, 100%  64%, 0  80%);
     position: relative;
+    z-index: 1;
     border-radius: 10px;
     background-position: top;
     background-size: cover;
     height: 100%;
+
+
+
   }
 
   .card:hover {
     cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    transition: 0.2s all ease-in-out;
+    .text {
+      top: 20px;
+    }
+    .text:after {
+      background: linear-gradient(to top,
+              rgba(13, 24, 33, 0.08) 20%,
+              rgba(13, 24, 33, 0.24) 80%
+      );
+    }
+    .superior {
+      clip-path: none;
+      border-radius: 10px 10px 0 0 ;
+      box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+      border-bottom: 3px solid #344966;
+      background-color: #344966;
+      opacity: 0.6;
+    }
   }
+
+
 
 
   .card:nth-child(odd):hover {
     .name {
-      transform: translateX(360px);
+      transform: translateX(40px);
     }
   }
 

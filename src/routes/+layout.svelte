@@ -1,8 +1,16 @@
 <script lang="ts">
     import Header from './Header.svelte';
+    import {innerWidth} from "../lib/stores";
+
+
 
 
 </script>
+
+<svelte:window bind:innerWidth={$innerWidth} />
+
+
+
 
 <div class="app">
     <Header />

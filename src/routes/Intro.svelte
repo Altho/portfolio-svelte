@@ -31,6 +31,7 @@
 
 <style>
     .container {
+        left: 50%;
         width: 100%;
         height: 100vh;
         padding: 20px;
@@ -39,10 +40,27 @@
         align-items: center;
     }
 
+
+
     p {
         font-size: 1.2em;
         line-height: 2.5em;
         text-align: justify;
 
+    }
+
+    @media (max-width: 900px) {
+
+        .container {
+            width:90%;
+
+        }
+
+        p {
+
+            line-height: 1.5em;
+
+
+        }
     }
 </style>
