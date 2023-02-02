@@ -9,7 +9,6 @@
   import {writable} from "svelte/store";
   import {spring} from "svelte/motion";
   import {cubicOut, bounceInOut} from "svelte/easing";
-  import { tap } from 'svelte-gestures';
   export let direction;
 
   console.log(projects)
@@ -42,11 +41,11 @@
 
 <div
         class="card"
-        use:tap={{ timeframe: 300 }}
+
         in:fly={{x:getDirection(), duration:400}}
         on:mouseenter={mouseEnter}
         on:mouseleave={mouseLeaves}
-        on:tap={mouseEnter}>
+
     <div class="superior" style="height:{$y}%; background-image: url({projects.image})" >
 
 
