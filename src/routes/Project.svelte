@@ -39,7 +39,7 @@
     </div>
     {#if projects.technologies}
         {#if isParagraphVisible}
-            <div class="text" transition:fly={{duration: 150}}>
+            <div class="text" transition:fly={{duration: 100}}>
                 <p>{projects.content}</p>
             </div>
         {/if}
@@ -75,6 +75,7 @@
     top: 20px;
     height: 100%;
     font-weight: bold;
+    font-size: 1.5em;
     z-index: -1;
     transition: all 0.2s ease-in-out;
     writing-mode: vertical-rl;
@@ -118,12 +119,7 @@
     color: white;
   }
 
-  .name::after {
-    content: '';
-    margin-left: 10px;
-    border-bottom: 5px solid white;
-    width: 100%;
-  }
+
 
   .superior {
     clip-path: polygon(0% 0%, 100% 0%, 100%  64%, 0  80%);

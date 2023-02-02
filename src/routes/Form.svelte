@@ -6,7 +6,7 @@
     let message;
 </script>
 
-
+<section>
 <form method="post">
     <Title>CONTACT</Title>
     <div class="container">
@@ -20,8 +20,12 @@
 
 
 </form>
+</section>
 
 <style lang="scss">
+  section {
+    height:100vh;
+  }
   .container {
     display: flex;
     flex-direction: column;

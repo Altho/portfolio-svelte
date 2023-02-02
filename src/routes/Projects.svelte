@@ -98,6 +98,10 @@
 
 
 <style lang="scss">
+
+  section {
+    height:100vh;
+  }
   .container {
     width: 100%;
     position: absolute;

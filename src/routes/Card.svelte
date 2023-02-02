@@ -6,24 +6,32 @@
     export let prof;
 
 
-    const toX = spring(0, {
+    const toX = tweened(0, {
+        duration: 200,
+        easing: cubicOut
+    });
+
+    const panel = spring(80, {
         stiffness: 0.1,
         damping: 0.35
     });
 
-    const panel = tweened(80, {
-        duration: 200,
-        easing: linear,
-    });
+    const mouseEnter = () => {
+        toX.set(-50)
+        panel.set(20);
+    }
 
+    const mouseLeave = () => {
+        toX.set(0)
+        panel.set(80);
+    }
 
 
 </script>
 
 
 <div class="card-container" in:fly={{x:600, duration:400}} >
-    <div class="card"  on:mouseenter={() => {toX.set(-50); panel.set(20)}} on:mouseleave={() => {toX.set(0); panel.set(80)}}>
-
+    <div class="card"  on:mouseenter={mouseEnter} on:mouseleave={mouseLeave}>
         <div class="left-side">
             <div class="text">
                 Content: {prof.content}
@@ -65,7 +73,7 @@
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     display: flex;
     height: 200px;
-    transition: all 0.2s ease-in-out;
+    //transition: all 0.2s ease-in-out;
 
   }
 
@@ -76,7 +84,7 @@
 
     .text {
       overflow: scroll;
-      transition: all 0.2s ease-in-out;
+      //transition: all 0.2s ease-in-out;
     }
 
 
@@ -110,7 +118,7 @@
     height: 150px;;
     overflow: hidden;
     font-size: 1.05em;
-    transition: all 0.2s ease-in-out;
+    //transition: all 0.2s ease-in-out;
 
 
   }
@@ -120,7 +128,7 @@
     width: 60%;
     border-radius: 0 10px 10px 0;
     box-shadow: -9px 0px 14px -4px rgba(0, 0, 0, 0.86);
-    transition: all 0.2s ease-in-out;
+    //transition: all 0.2s ease-in-out;
 
   }
 
