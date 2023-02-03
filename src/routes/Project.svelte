@@ -40,7 +40,7 @@
 
 <div
         class="card"
-        in:fly={{x:getDirection(), duration:400}}
+        in:fade
         on:mouseenter={mouseEnter}
         on:mouseleave={mouseLeaves}
         >

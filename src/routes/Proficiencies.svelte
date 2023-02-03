@@ -91,13 +91,7 @@
 </script>
 
 
-<section use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: 'pan-y' }} on:swipe={event => {
-  if (event.detail.direction === 'left') {
-    next();
-  } else if (event.detail.direction === 'right') {
-    prev();
-  }
-}}>
+<section>
     <Title>PROFICIENCIES</Title>
     <div class="frame">
         <div class="container">
@@ -136,7 +130,6 @@
 
   .container {
     width: 100%;
-    //position: absolute;
     padding: 20px;
     display: flex;
     justify-content: center;

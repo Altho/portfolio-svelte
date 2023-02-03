@@ -35,7 +35,7 @@
 
 
 
-        <div class="container" out:fade>
+
             {#if isError}
                 <p class="error" transition:fade>Something went wrong, please try again</p>
             {/if}
@@ -63,7 +63,7 @@
                     Send
                 {/if}
             </button>
-        </div>
+
 
 
     </form>
@@ -73,12 +73,15 @@
   section {
     height: 100vh;
     position: relative;
+    ;
   }
 
   form {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+   gap: 20px;
   }
 
   label {
@@ -106,15 +109,7 @@
 
 
 
-  .container {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
-    gap: 20px;
-  }
 
   .contact-infos {
     width: 100%;
@@ -219,4 +214,8 @@
     }
 
   }
+
+
+
+
 </style>

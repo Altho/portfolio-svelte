@@ -1,5 +1,5 @@
 <script>
-    import {fly} from 'svelte/transition';
+    import {fade} from 'svelte/transition';
     import {spring, tweened} from "svelte/motion";
     import {cubicOut, bounceInOut, linear} from "svelte/easing";
 
@@ -39,7 +39,7 @@
 </script>
 
 
-<div class="card-container" in:fly={{x:getDirection(), duration:400}} >
+<div class="card-container" in:fade >
     <div class="card"  on:mouseenter={mouseEnter} on:mouseleave={mouseLeave}>
         <div class="left-side">
             <div class="text">

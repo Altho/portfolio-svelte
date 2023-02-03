@@ -93,13 +93,7 @@
 
 </script>
 
-<section use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: 'pan-y' }} on:swipe={event => {
-  if (event.detail.direction === 'left') {
-    next();
-  } else if (event.detail.direction === 'right') {
-    prev();
-  }
-}}>
+<section >
 
 
     <Title>PROJECTS</Title>
@@ -131,9 +125,7 @@
 
 <style lang="scss">
 
-  section {
-    height: 100vh;
-  }
+
 
   .container {
     width: 100%;
