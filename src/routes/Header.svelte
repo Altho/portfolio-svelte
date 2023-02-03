@@ -27,8 +27,10 @@
 
 <style>
     header {
+        z-index: 5;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        width: 100%;
         position: sticky;
         top:0;
     }
@@ -36,8 +38,10 @@
 
     nav {
         display: flex;
+        width: 100%;
         justify-content: center;
         color: #fff;
+        background-color: #344966;
 
 
     }
@@ -52,6 +56,7 @@
 
     ul {
         position: relative;
+        width: 100%;
         padding: 0;
         margin: 0;
         height: 3em;
@@ -69,7 +74,7 @@
     }
 
     li[aria-current='page'] {
-        border-bottom: 2px solid red;
+
     }
 
     nav a {
