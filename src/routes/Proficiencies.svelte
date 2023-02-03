@@ -148,6 +148,7 @@
   .frame {
     display: flex;
     position: relative;
+    justify-content: center;
     //height: 80vh;
 
     button {
@@ -207,10 +208,7 @@
 
   @media (max-width: 900px) {
 
-    .container {
-      width: 80%;
 
-    }
 
     .frame {
       button {
