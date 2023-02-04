@@ -157,6 +157,7 @@
   input {
     width: 100%;
     height: 20px;
+    font-size: 16px;
     border: 1px solid #0D1821;
     border-radius: 5px;
     padding: 10px;
@@ -200,6 +201,7 @@
     min-height: 80px;
     max-height: 200px;
     max-width: 100%;
+    font-size: 16px;
     min-width: 100%;
     border-radius: 5px;
     color: white;
