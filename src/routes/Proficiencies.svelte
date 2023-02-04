@@ -16,7 +16,7 @@
     }
 
     let startIndex = 0;
-    let endIndex;
+    let endIndex = 4;
     let storeLength;
     let isGoingLeft = false;
 
@@ -26,32 +26,22 @@
 
     const proficienciesStore = writable<Proficiency[]>([]);
     const proficiencies = [];
-    const displayed = writable<Proficiency[]>([]);
-
-    const itemAmount = () => {
-        if ($width > 1200) {
-            return 4;
-        } else if ($width > 800) {
-            return 3;
-        } else {
-            return 2;
-        }
-    }
+    const displayed = writable<Proficiency[]>([])
 
 
     function prev() {
         console.log(isGoingLeft)
-        if (storeLength < itemAmount()) return;
+        if (storeLength < 4) return;
         isGoingLeft = true;
 
-        if (endIndex === itemAmount()) {
-            const ceiling = Math.ceil(storeLength / itemAmount()) * itemAmount()
-            startIndex = ceiling - itemAmount();
+        if (endIndex === 4) {
+            const ceiling = Math.ceil(storeLength / 4) * 4
+            startIndex = ceiling - 4;
             endIndex = ceiling;
             displayed.set(proficiencies.slice(startIndex, endIndex));
         } else {
-            startIndex -= itemAmount();
-            endIndex -= itemAmount();
+            startIndex -= 4;
+            endIndex -= 4;
             displayed.set(proficiencies.slice(startIndex, endIndex));
         }
         console.log(isGoingLeft)
@@ -62,13 +52,13 @@
         console.log(isGoingLeft)
 
         isGoingLeft = false;
-        if (storeLength < itemAmount()) return;
-        startIndex = (startIndex + itemAmount());
-        endIndex = (endIndex + itemAmount());
+        if (storeLength < 4) return;
+        startIndex = (startIndex + 4);
+        endIndex = (endIndex + 4);
         displayed.set(proficiencies.slice(startIndex, endIndex));
         if (endIndex > storeLength) {
             startIndex = 0;
-            endIndex = itemAmount();
+            endIndex = 4;
             displayed.set(proficiencies.slice(startIndex, endIndex));
 
         }
@@ -78,7 +68,6 @@
     }
 
     onMount(async () => {
-        endIndex = itemAmount();
         const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
         proficiencies.push(...(data as Proficiency[]));
         storeLength = proficiencies.length;

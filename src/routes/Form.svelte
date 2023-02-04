@@ -155,7 +155,7 @@
   }
 
   input {
-    width: 100%;
+    //width: 100%;
     height: 20px;
     font-size: 16px;
     border: 1px solid #0D1821;
