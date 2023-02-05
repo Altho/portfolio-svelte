@@ -12,6 +12,9 @@
 
 </script>
 
+<svelte:window bind:innerWidth={$innerWidth} />
+
+
 <svelte:head>
     <title>Altho</title>
     <meta name="description" content="Alan Thomas portfolio"/>
@@ -19,7 +22,7 @@
 
 <Welcome/>
 <Intro/>
-
+{$width}
 {#if $width > 900}
     <Proficiencies/>
 {:else}

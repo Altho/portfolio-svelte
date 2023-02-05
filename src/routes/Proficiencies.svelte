@@ -6,6 +6,7 @@
     import {swipe} from 'svelte-gestures';
     import Title from "./Title.svelte";
     import {innerWidth} from "../lib/stores";
+    import CardSkeleton from "./CardSkeleton.svelte";
 
     type Proficiency = {
         id: number,
@@ -89,7 +90,12 @@
 
                 {#each $displayed as prof (prof.id)}
                     <Card direction={isGoingLeft} prof={prof}/>
-                {/each}
+                {:else}
+                    <CardSkeleton />
+                    <CardSkeleton />
+                    <CardSkeleton />
+                    <CardSkeleton />
+                    {/each}
                 <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg">
                 </button>
             {:else}

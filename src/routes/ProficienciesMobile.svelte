@@ -5,6 +5,8 @@
   import Card from "./Card.svelte";
   import Title from "./Title.svelte";
   import CardMobile from "./CardMobile.svelte";
+  import CardSkeleton from "./CardSkeleton.svelte";
+  import CardMobileSketelton from "./CardMobileSketelton.svelte";
 
   type Proficiency = {
     id: number,
@@ -15,7 +17,7 @@
   }
 
   let startIndex = 0;
-  let endIndex = 2;
+  let endIndex = 1;
   let storeLength;
   let isGoingLeft = false;
 
@@ -67,11 +69,11 @@
   }
 
   onMount(async () => {
-
     const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
     proficiencies.push(...(data as Proficiency[]));
     storeLength = proficiencies.length;
     displayed.set(proficiencies.slice(startIndex, endIndex));
+
 
 
   });
@@ -83,14 +85,17 @@
 <section>
     <Title>PROFICIENCIES</Title>
     <div class="arrow-container">
-        <button class="left" on:tap={prev}><img width="50" src="/images/arrow.svg"></button>
-        <button class="right" on:tap={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
+        <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
+        <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
     </div>
     <div class="frame">
 
         <div class="container">
+
                 {#each $displayed as prof (prof.id)}
-                    <CardMobile direction={isGoingLeft} prof={prof}/>
+                    <CardMobile direction={isGoingLeft} prof={prof} />
+                    {:else}
+                    <CardMobileSketelton />
                 {/each}
 
 

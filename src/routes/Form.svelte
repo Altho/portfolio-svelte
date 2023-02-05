@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
     import Title from "./Title.svelte";
     import {enhance} from '$app/forms';
-    import {fade} from 'svelte/transition';
+    import {fade, fly} from 'svelte/transition';
+    import Notification from "./Notification.svelte";
 
     let name;
     let email;
@@ -9,6 +10,14 @@
     let isLoading = false;
     let isError = false;
     let isSuccess = false;
+    let gotNotification = false
+
+    const setUnmount = () => {
+        gotNotification = true;
+        setTimeout(() => {
+            gotNotification = false
+        }, 3000)
+    }
 
 
 </script>
@@ -21,11 +30,13 @@
         isError = false;
         isSuccess = false;
         if (result.type === 'success') {
+            setUnmount();
             isLoading = false;
             isSuccess = true;
             form.reset();
 
         } else {
+            setUnmount();
             isLoading = false;
             isError = true;
         }
@@ -33,191 +44,130 @@
 }}>
 
 
+        {#if isError}
+            <Notification messageType="Error">Something went wrong</Notification>
+        {/if}
+        {#if isSuccess && gotNotification}
+            <Notification messageType="Success">Your message was sent !</Notification>
 
-
-
-            {#if isError}
-                <p class="error" transition:fade>Something went wrong, please try again</p>
-            {/if}
-            {#if isSuccess}
-                <p class="success" transition:fade>Your message was sent. Thank you</p>
-            {/if}
-            <div class="contact-infos">
-                <div class="input-container">
-                    <label for="name">Name <span>*</span> :</label>
-                    <input name="name" type="text"  id="name" placeholder="Name" bind:value={name}/>
-                </div>
-                <div class="input-container">
-                    <label for="email">Email <span>*</span> :</label>
-                    <input  name="email" type="email" id="email" required placeholder="Email" bind:value={email}/>
-                </div>
+        {/if}
+        <div class="contact-infos">
+            <div class="input-container">
+                <label for="name">Name <span>*</span> :</label>
+                <input name="name" type="text" id="name" placeholder="Name" bind:value={name}/>
             </div>
             <div class="input-container">
-                <label for="message">Message <span>*</span> :</label>
-                <textarea name="message" id="message" required bind:value={message}></textarea>
+                <label for="email">Email <span>*</span> :</label>
+                <input name="email" type="email" id="email" required placeholder="Email" bind:value={email}/>
             </div>
-            <button type="submit">
-                {#if isLoading}
-                    Sending...
-                {:else}
-                    Send
-                {/if}
-            </button>
-
+        </div>
+        <div class="input-container">
+            <label for="message">Message <span>*</span> :</label>
+            <textarea name="message" id="message" required bind:value={message}></textarea>
+        </div>
+        <button type="submit">
+            {#if isLoading}
+                Sending...
+            {:else}
+                Send
+            {/if}
+        </button>
 
 
     </form>
 </section>
 
 <style lang="scss">
+
+
   section {
-    height: 100vh;
     position: relative;
-    ;
   }
+
 
   form {
     display: flex;
-    justify-content: center;
+    color: white;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-   gap: 20px;
+    font-size: 16px;
   }
 
-  label {
-    display: block;
-    font-size: 1.2em;
-    padding-left: 10px;
+  input {
+    padding: 5px;
+    all: unset;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #344966;
+    border: 2px solid #1C3041;
+    transition: all 0.2s ease-in-out;
     margin-bottom: 10px;
-    position: relative;
 
-    &:before {
-      content: "";
-      display: inline-block;
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 3px;
-      background-color: #0D1821;
-    }
-    span {
-      color: yellow;
+    &:focus {
+      background-color: #1C3041;
     }
   }
 
+  textarea {
+    all: unset;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #344966;
+    border: 2px solid #1C3041;
+    transition: all 0.2s ease-in-out;
 
-
-
-
+    &:focus {
+      background-color: #1C3041;
+    }
+  }
 
   .contact-infos {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
+    justify-content: center;
     align-items: center;
-    gap: 30px;
-
-    input {
-        width: 100%;
-    }
-
+    gap: 20px;
+    width: 100%;
   }
 
   .input-container {
+    display: flex;
     width: 100%;
-         }
+    flex-direction: column;
+    gap: 10px;
+  }
 
 
 
   button {
     background-color: #344966;
     border: 2px solid #0D1821;
-    width:200px;
+    width: 200px;
     color: #0D1821;
     border-radius: 5px;
     padding: 10px 20px;
     transition: all 0.2s ease-in-out;
     font-size: 18px;
     text-transform: uppercase;
-    &:hover {
 
+    &:hover {
       background-color: #0D1821;
       color: #344966;
       border: 2px solid #0D1821;
       cursor: pointer;
     }
+
     &:active {
       transform: translate(2px, 2px);
       box-shadow: rgb(0, 0, 0) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
     }
   }
 
-  input {
-    //width: 100%;
-    height: 20px;
-    font-size: 16px;
-    border: 1px solid #0D1821;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #344966;
-    transition: all 0.2s ease-in-out;
-    color: white;
-
-
-    &:focus {
-      outline: none;
-      background-color: #0D1821;
-      border: 1px solid #0D1821;
-      transition: all 0.2s ease-in-out;
-    }
-
-    &::placeholder {
-      color: #fff;
-    }
-  }
-
-  .error {
-    width: 100%;
-    padding: 10px;
-    background-color: lightpink;
-    border-radius: 5px;
-    color: red;
-
-  }
-
-  .success {
-    padding: 10px;
-    width: 100%;
-    text-align: center;
-    background-color: lightgreen;
-    border-radius: 5px;
-    color: green;
-  }
-
-  textarea {
-    border: 1px solid #000;
-    min-height: 80px;
-    max-height: 200px;
-    max-width: 100%;
-    font-size: 16px;
-    min-width: 100%;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    background-color: #344966;
-
-    &:focus {
-      outline: none;
-      background-color: #0D1821;
-      border: 1px solid #0D1821;
-      transition: all 0.2s ease-in-out;
-    }
-
-  }
-
-
-
 
 </style>
+
+
+

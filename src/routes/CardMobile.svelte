@@ -30,13 +30,6 @@
         panel.set(80);
     }
 
-    const getDirection = () => {
-        if (direction) {
-            return 600
-        } else {
-            return -600
-        }
-    }
 
 
 </script>
@@ -72,7 +65,6 @@
   .card-container {
     position: relative;
     width: 100%;
-
 
   }
 
