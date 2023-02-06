@@ -51,17 +51,19 @@
     <div class="text" >
         <p>{projects.content}</p>
     </div>
-    {#if projects.technologies}
+
 
         <div class="tech-container">
             <div class="technologies">
                 {#each projects.technologies as tech (tech.id)}
                     <img alt="tech logo" src={tech.logo}>
+                    {:else}
+                    Loading...
                 {/each}
             </div>
 
         </div>
-    {/if}
+
 
     <div class="name">
         {projects.name}

@@ -1,30 +1,32 @@
 <script lang="ts">
-    import Header from './Header.svelte';
+  import Header from './Header.svelte';
 
 
-
+  const year = new Date().getFullYear()
 
 </script>
 
 
-
-
-
 <div class="app">
-    <Header />
+    <Header/>
 
     <main>
-        <slot />
+        <slot/>
     </main>
 
     <footer>
-        <p>Altho</p>
+        <div class="footer-container"><p>© {year} Altho </p></div>
+        <div class="socials">
+            <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img width="50" src="/images/icons/socials/mastodon.svg" alt="mastodon"/></a>
+            <a target="_blank" href="https://github.com/Altho" ><img src="/images/icons/socials/github.svg" alt="github" width="50"/></a>
+            <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img src="/images/icons/socials/linkedin.svg" alt="linkedin" width="50"/></a>
+
+        </div>
     </footer>
 </div>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
-
+    @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
 
 
     :root {
@@ -33,13 +35,13 @@
     }
 
 
-
     .app {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
         font-family: Ubuntu;
     }
+
 
     main {
         flex: 1;
@@ -52,12 +54,29 @@
         box-sizing: border-box;
     }
 
+    img {
+        transition: all 0.3s ease-in-out;
+    }
+
+    img:hover {
+        filter: invert(63%) sepia(51%) saturate(6955%) hue-rotate(163deg) brightness(96%) contrast(103%);
+    }
+
     footer {
+        max-width: 64rem;
+        width: 100%;
+        transform: translateX(-50%);
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 12px;
+        left: 50%;
+        position: relative;
+        justify-content: space-between;
+        bottom: 0;
+    }
+
+    .socials {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 15px;
     }
 
     footer a {

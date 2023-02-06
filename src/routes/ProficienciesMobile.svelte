@@ -35,14 +35,14 @@
     if (storeLength < 2) return;
     isGoingLeft = true;
 
-    if (endIndex === 2) {
-      const ceiling = Math.ceil(storeLength / 2) * 2
+    if (endIndex === 1) {
+      const ceiling = Math.ceil(storeLength / 1)
       startIndex = ceiling - 2;
       endIndex = ceiling;
       displayed.set(proficiencies.slice(startIndex, endIndex));
     } else {
-      startIndex -= 2;
-      endIndex -= 2;
+      startIndex -= 1;
+      endIndex -= 1;
       displayed.set(proficiencies.slice(startIndex, endIndex));
     }
     console.log(isGoingLeft)
@@ -53,13 +53,13 @@
     console.log(isGoingLeft)
 
     isGoingLeft = false;
-    if (storeLength < 2) return;
-    startIndex = (startIndex + 2);
-    endIndex = (endIndex + 2);
+    if (storeLength < 1) return;
+    startIndex = (startIndex + 1);
+    endIndex = (endIndex + 1);
     displayed.set(proficiencies.slice(startIndex, endIndex));
     if (endIndex > storeLength) {
       startIndex = 0;
-      endIndex = 2;
+      endIndex = 1;
       displayed.set(proficiencies.slice(startIndex, endIndex));
 
     }
