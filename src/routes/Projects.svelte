@@ -114,6 +114,8 @@
 
                 {#each $displayed as proj (proj.id)}
                     <Project direction={isGoingLeft} projects={proj}/>
+                    {:else}
+                    loading...
                 {/each}
                 {/if}
 

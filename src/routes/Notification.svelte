@@ -2,12 +2,14 @@
     import {fade, fly} from 'svelte/transition';
     export let messageType: string;
     const getColor = () => {
+
         if(messageType === 'Success') {
             return '#28b853';
         }
         else {
             return '#c21535'
         }
+
     }
 </script>
 

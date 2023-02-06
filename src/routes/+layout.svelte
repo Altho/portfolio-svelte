@@ -24,15 +24,18 @@
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
+
     :root {
         background-color: #344966;
     }
+
     .app {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
         font-family: Ubuntu;
     }
+
     main {
         flex: 1;
         display: flex;
@@ -43,12 +46,14 @@
         margin: 0 auto;
         box-sizing: border-box;
     }
+
     img {
         transition: all 0.3s ease-in-out;
     }
     img:hover {
         filter: invert(63%) sepia(51%) saturate(6955%) hue-rotate(163deg) brightness(96%) contrast(103%);
     }
+
     footer {
         max-width: 64rem;
         width: 100%;
@@ -59,6 +64,8 @@
         justify-content: space-between;
         bottom: 0;
     }
+
+
     .socials {
         display: flex;
         justify-content: space-evenly;

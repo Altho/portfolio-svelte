@@ -1,4 +1,5 @@
 <script lang="ts">
+
     import {supabase} from "../lib/client";
     import {onMount} from "svelte";
     import {writable} from "svelte/store";
@@ -35,6 +36,7 @@
             displayed.set(proficiencies.slice(startIndex, endIndex));
         }
         console.log(isGoingLeft)
+
     }
     function next() {
         console.log(isGoingLeft)

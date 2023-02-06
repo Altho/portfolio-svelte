@@ -13,6 +13,7 @@
         letter-spacing: 0.3em;
         width: 100%;
         height:50px;
+        letter-spacing: 0.3em;
         font-size: 2em;
         margin-bottom: 50px;
         margin-top: 50px;
