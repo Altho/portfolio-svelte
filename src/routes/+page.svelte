@@ -22,7 +22,6 @@
 
 <Welcome/>
 <Intro/>
-{$width}
 {#if $width > 900}
     <Proficiencies/>
 {:else}

@@ -10,6 +10,7 @@
         justify-content: center;
         align-items: center;
         font-family: 'Exo 2', sans-serif;
+        letter-spacing: 0.3em;
         width: 100%;
         height:50px;
         letter-spacing: 0.3em;

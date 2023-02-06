@@ -1,9 +1,6 @@
 <script lang="ts">
-  import Header from './Header.svelte';
-
-
-  const year = new Date().getFullYear()
-
+    import Header from './Header.svelte';
+    const year = new Date().getFullYear()
 </script>
 
 
@@ -28,12 +25,9 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
 
-
     :root {
         background-color: #344966;
-
     }
-
 
     .app {
         display: flex;
@@ -41,7 +35,6 @@
         min-height: 100vh;
         font-family: Ubuntu;
     }
-
 
     main {
         flex: 1;
@@ -57,7 +50,6 @@
     img {
         transition: all 0.3s ease-in-out;
     }
-
     img:hover {
         filter: invert(63%) sepia(51%) saturate(6955%) hue-rotate(163deg) brightness(96%) contrast(103%);
     }
@@ -73,16 +65,15 @@
         bottom: 0;
     }
 
+
     .socials {
         display: flex;
         justify-content: space-evenly;
         gap: 15px;
     }
-
     footer a {
         font-weight: bold;
     }
-
     @media (min-width: 480px) {
         footer {
             padding: 12px 0;
