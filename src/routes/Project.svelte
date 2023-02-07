@@ -2,38 +2,38 @@
 
 
 
-  export let projects
-  import {fly, fade} from 'svelte/transition';
-  import {supabase} from "$lib/client.ts";
-  import {writable} from "svelte/store";
-  import {spring} from "svelte/motion";
-  import {cubicOut, bounceInOut} from "svelte/easing";
-  export let direction;
+    export let projects
+    import {fly, fade} from 'svelte/transition';
+    import {supabase} from "$lib/client.ts";
+    import {writable} from "svelte/store";
+    import {spring} from "svelte/motion";
+    import {cubicOut, bounceInOut} from "svelte/easing";
+    export let direction;
 
-  console.log(projects)
-
-
-  const y = spring(95, {
-      stiffness: 0.1,
-      damping: 0.35
-  });
+    console.log(projects)
 
 
-  const mouseEnter = () => {
-      y.set(5);
-  }
+    const y = spring(95, {
+        stiffness: 0.1,
+        damping: 0.35
+    });
 
-  const mouseLeaves = () => {
-      y.set(95);
-  }
 
-  const getDirection = () => {
-      if (direction ) {
-          return -600
-      } else {
-          return 600
-      }
-  }
+    const mouseEnter = () => {
+        y.set(5);
+    }
+
+    const mouseLeaves = () => {
+        y.set(95);
+    }
+
+    const getDirection = () => {
+        if (direction ) {
+            return -600
+        } else {
+            return 600
+        }
+    }
 
 </script>
 
@@ -43,7 +43,7 @@
         in:fade
         on:mouseenter={mouseEnter}
         on:mouseleave={mouseLeaves}
-        >
+>
     <div class="superior" style="height:{$y}%; background-image: url({projects.image})" >
 
 
@@ -51,24 +51,24 @@
     <div class="text" >
         <p>{projects.content}</p>
     </div>
-
+    {#if projects.technologies}
 
         <div class="tech-container">
             <div class="technologies">
                 {#each projects.technologies as tech (tech.id)}
                     <img alt="tech logo" src={tech.logo}>
                     {:else}
-                    Loading...
+                    ..Loading
                 {/each}
             </div>
 
         </div>
-
+    {/if}
 
     <div class="name">
         {projects.name}
     </div>
-    </div>
+</div>
 
 
 <style lang="scss">
