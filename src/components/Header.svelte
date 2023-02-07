@@ -11,13 +11,13 @@
                 <a href="/">About</a>
             </li>
             <li aria-current={$page.url.pathname.startsWith('/resume') ? 'page' : undefined}>
-                <a href="/">Resume</a>
+                <a href="/static">Resume</a>
             </li>
-            <li aria-current={$page.url.pathname.startsWith('/resume') ? 'page' : undefined}>
-                <a href="/">Blog</a>
+            <li aria-current={$page.url.pathname.startsWith('/blog') ? 'page' : undefined}>
+                <a href="/blog">Blog</a>
             </li>
             <li aria-current={$page.url.pathname.startsWith('/contact') ? 'page' : undefined}>
-                <a href="/">Contact</a>
+                <a href="/static">Contact</a>
             </li>
         </ul>
 
@@ -74,7 +74,7 @@
     }
 
     li[aria-current='page'] {
-
+        color: red;
     }
 
     nav a {

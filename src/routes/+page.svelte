@@ -1,11 +1,11 @@
 <script>
-    import Welcome from "./Welcome.svelte";
-    import Intro from "./Intro.svelte";
-    import Proficiencies from "./Proficiencies.svelte";
-    import Projects from "./Projects.svelte";
-    import Form from "./Form.svelte";
+    import Welcome from "../components/Welcome.svelte";
+    import Intro from "../components/Intro.svelte";
+    import Proficiencies from "../components/proficiencies/Proficiencies.svelte";
+    import Projects from "../components/projects/Projects.svelte";
+    import Form from "../components/Form.svelte";
     import {innerWidth} from "../lib/stores";
-    import ProficienciesMobile from "./ProficienciesMobile.svelte";
+    import ProficienciesMobile from "../components/proficiencies/ProficienciesMobile.svelte";
 
     let width;
     $: width = innerWidth;

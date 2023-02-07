@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Header from './Header.svelte';
+    import Header from '../components/Header.svelte';
     const year = new Date().getFullYear()
 </script>
 
@@ -57,6 +57,8 @@
     footer {
         max-width: 64rem;
         width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
         transform: translateX(-50%);
         display: flex;
         left: 50%;
@@ -74,9 +76,5 @@
     footer a {
         font-weight: bold;
     }
-    @media (min-width: 480px) {
-        footer {
-            padding: 12px 0;
-        }
-    }
+
 </style>

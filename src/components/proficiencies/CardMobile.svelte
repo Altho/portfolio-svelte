@@ -2,7 +2,7 @@
     import {fade} from 'svelte/transition';
     import {spring, tweened} from "svelte/motion";
     import {cubicOut, bounceInOut, linear} from "svelte/easing";
-    import {innerWidth} from "../lib/stores";
+    import {innerWidth} from "$lib/stores";
 
     let width;
     $: width = innerWidth;

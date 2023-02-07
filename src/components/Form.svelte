@@ -2,7 +2,7 @@
     import Title from "./Title.svelte";
     import {enhance} from '$app/forms';
     import {fade, fly} from 'svelte/transition';
-    import Notification from "./Notification.svelte";
+    import Notification from "./notification/Notification.svelte";
 
     let name;
     let email;

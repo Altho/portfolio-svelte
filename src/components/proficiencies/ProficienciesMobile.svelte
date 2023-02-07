@@ -1,10 +1,10 @@
 <script lang="ts">
 
-    import {supabase} from "../lib/client";
+    import {supabase} from "../../lib/client";
     import {onMount} from "svelte";
     import {writable} from "svelte/store";
     import Card from "./Card.svelte";
-    import Title from "./Title.svelte";
+    import Title from "../Title.svelte";
     import CardMobile from "./CardMobile.svelte";
     import CardSkeleton from "./CardSkeleton.svelte";
     import CardMobileSketelton from "./CardMobileSketelton.svelte";

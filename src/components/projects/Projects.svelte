@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {supabase} from "../lib/client";
+    import {supabase} from "../../lib/client";
     import {onMount} from "svelte";
     import {writable} from "svelte/store";
     import {swipe} from 'svelte-gestures';
-    import Title from "./Title.svelte";
+    import Title from "../Title.svelte";
     import Project from "./Project.svelte";
-    import {innerWidth} from "../lib/stores";
+    import {innerWidth} from "../../lib/stores";
 
     type Proficiency = {
         id: number,

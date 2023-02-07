@@ -1,11 +1,11 @@
 <script lang="ts">
-  import {supabase} from "../lib/client";
+  import {supabase} from "../../lib/client";
   import {onMount} from "svelte";
   import {writable} from "svelte/store";
   import Card from "./Card.svelte";
   import {swipe} from 'svelte-gestures';
-  import Title from "./Title.svelte";
-  import {innerWidth} from "../lib/stores";
+  import Title from "../Title.svelte";
+  import {innerWidth} from "../../lib/stores";
   import CardSkeleton from "./CardSkeleton.svelte";
   type Proficiency = {
     id: number,
