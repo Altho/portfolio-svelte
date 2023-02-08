@@ -6,6 +6,8 @@
     import Form from "../components/Form.svelte";
     import {innerWidth} from "../lib/stores";
     import ProficienciesMobile from "../components/proficiencies/ProficienciesMobile.svelte";
+    import { fade, blur, fly, slide, scale, crossfade } from "svelte/transition";
+
 
     let width;
     $: width = innerWidth;
@@ -30,4 +32,5 @@
 
 <Projects/>
 <Form/>
+
 

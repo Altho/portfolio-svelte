@@ -36,9 +36,13 @@
 	"dependencies": {
 		"@supabase/auth-helpers-sveltekit": "^0.8.7",
 		"@supabase/supabase-js": "^2.5.0",
+		"@types/uuid": "^9.0.0",
+		"dayjs": "^1.11.7",
 		"form-data": "^4.0.0",
 		"mailgun.js": "^8.0.6",
+		"svelte-exmarkdown": "^1.1.7",
 		"svelte-gestures": "^1.4.1",
-		"svelte-inview": "^3.0.2"
+		"svelte-inview": "^3.0.2",
+		"uuid": "^9.0.0"
 	}
 }
