@@ -1,5 +1,10 @@
 <script>
     export let infos;
+    import dayjs from 'dayjs'
+    import relativeTime from 'dayjs/plugin/relativeTime';
+    dayjs.extend(relativeTime)
+
+    const date = dayjs(infos.created_at).fromNow();
     const preview = infos.content.slice(0, 100);
     if(preview.length > 100) {
         infos.content = preview + '...';
@@ -10,7 +15,7 @@
 <div class="container">
     <a href="/blog/{infos.slug}">
    <div class="title">{infos.title}</div>
-
+    <p class="time">{date}</p>
     <div>
         {preview}
     </div>
