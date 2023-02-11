@@ -10,8 +10,7 @@ export async function load({params}) {
 
 export const actions: Actions = {
     sendComment: async ({request}) => {
-        console.log("sent")
-        console.log(request.name)
+
         const data = await request.formData();
 
 
@@ -20,6 +19,9 @@ export const actions: Actions = {
         if (!name) {
             throw new Error('Name is required')
         }
+
+        const token = data.get('token');
+        console.log(token)
         const comment = data.get('comment');
         const postId = data.get('postId')
         console.log(comment);

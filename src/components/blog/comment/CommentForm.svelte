@@ -6,6 +6,7 @@
     export let postId;
     let isSending = false;
     const key = PUBLIC_SITEKEY
+    let token;
 
     let captcha;
 
@@ -16,6 +17,7 @@
     }
     const handleSuccess = (payload) => {
         console.log(payload)
+        token = payload.detail.token
         disabled = false;
     }
 
@@ -49,7 +51,7 @@
         <label for="comment">Comment: </label>
         <textarea id="comment" required name="comment" placeholder="name"></textarea>
         <input type="hidden" name="postId" value={postId}/>
-        <input type="hidden" name="captcha" value={success}/>
+        <input type="hidden" name="token" value={token}/>
 
         <div class="button-container">
             <HCaptcha
