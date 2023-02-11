@@ -14,7 +14,8 @@
     const handleError = () => {
         captcha.reset();
     }
-    const handleSuccess = () => {
+    const handleSuccess = (payload) => {
+        console.log(payload)
         disabled = false;
     }
 
