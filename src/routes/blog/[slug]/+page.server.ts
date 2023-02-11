@@ -21,7 +21,7 @@ export const actions: Actions = {
     const name = data.get('name');
     const token = data.get('token');
     const body = {response: token, secret: key, sitekey: siteKey};
-
+    console.log('about to verify captcha')
     const response = await fetch('https://hcaptcha.com/siteverify', {
       method: 'POST',
       credentials: 'omit',
@@ -34,6 +34,7 @@ export const actions: Actions = {
     const postId = data.get('postId')
 
     const res = await response.json();
+    console.log(res, 'response')
     const {success} = res;
     console.log('data: ', res);
     if (success && comment && name) {
