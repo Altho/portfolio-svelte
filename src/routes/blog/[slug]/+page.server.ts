@@ -23,6 +23,7 @@ export const actions: Actions = {
     const token = data.get('token');
     const body = {response: token, secret: key, sitekey: siteKey};
     console.log('about to verify captcha')
+    console.log(body)
     const response = await fetch('https://hcaptcha.com/siteverify', {
       method: 'POST',
       credentials: 'omit',
