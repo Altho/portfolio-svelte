@@ -35,6 +35,7 @@
         min-height: 100vh;
         font-family: Ubuntu;
         flex-direction: column;
+        color: white;
         display: flex;
 
     }

@@ -13,8 +13,6 @@ export const actions: Actions = {
     default: async ({request}) => {
         const data = await request.formData();
 
-
-
         const email = data.get('email');
         console.log(email);
         if (!email) {
@@ -41,6 +39,7 @@ export const actions: Actions = {
         });
 
     },
+
 
 };
 

@@ -5,7 +5,7 @@
     import {supabase} from "../../lib/client";
     import {posts} from "../../lib/stores";
     import Preview from "../../components/blog/preview/Preview.svelte";
-    import '../../styles/markdown.css'
+    import '../../styles/markdown.scss'
 
 
     onMount(async () => {

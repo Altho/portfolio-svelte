@@ -1,6 +1,4 @@
-import { posts } from '$lib/stores';
-import { error } from '@sveltejs/kit';
-import {get} from "svelte/store";
+import {Actions, error} from '@sveltejs/kit';
 import {supabase} from "../../../lib/client";
 
 export async function load({params}) {
@@ -9,4 +7,36 @@ export async function load({params}) {
         post: post.data
     };
 }
+
+export const actions: Actions = {
+    sendComment: async ({request}) => {
+        console.log("sent")
+        console.log(request.name)
+        const data = await request.formData();
+
+
+        const name = data.get('name');
+        console.log(name);
+        if (!name) {
+            throw new Error('Name is required')
+        }
+        const comment = data.get('comment');
+        const success = data.get('sucess');
+        if (!success) {
+            throw new Error ('captcha failed')
+        }
+        const postId = data.get('postId')
+        console.log(comment);
+        if (!comment) {
+            throw new Error('Message is required')
+        }
+
+        await supabase
+          .from('comments')
+          .insert({ name, comment, blog_id: postId })
+
+
+    },
+
+};
 
