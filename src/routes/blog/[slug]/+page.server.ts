@@ -21,7 +21,7 @@ export const actions: Actions = {
             throw new Error('Name is required')
         }
         const comment = data.get('comment');
-        const success = data.get('sucess');
+        const success = data.get('success');
         if (!success) {
             throw new Error ('captcha failed')
         }
