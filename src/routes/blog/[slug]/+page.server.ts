@@ -30,7 +30,7 @@ export const actions: Actions = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body,
+      body: body,
     });
     const comment = data.get('comment');
     const postId = data.get('postId')
