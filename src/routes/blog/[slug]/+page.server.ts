@@ -16,6 +16,7 @@ export async function load({params}) {
 
 export const actions: Actions = {
   sendComment: async ({request}) => {
+    console.log('sendcomment')
 
     const data = await request.formData();
     const name = data.get('name');
