@@ -43,9 +43,7 @@ export const actions: Actions = {
         .from('comments')
         .insert({name, comment, blog_id: postId})
     } else {
-      return {
-        status: 500,
-      };
+      throw new Error ('error')
     }
 
 
