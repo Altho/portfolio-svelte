@@ -4,8 +4,8 @@ import {PUBLIC_SITEKEY} from '$env/static/public'
 
 import {supabase} from "../../../lib/client";
 
-const key = PRIVATE_CAPTCHA_KEY
-const siteKey = PUBLIC_SITEKEY
+const key: string = PRIVATE_CAPTCHA_KEY
+const siteKey: string = PUBLIC_SITEKEY
 
 export async function load({params}) {
   const post = await supabase.from("blog").select('content, title, id, created_at, slug').eq('slug', params.slug).single();
@@ -23,13 +23,20 @@ export const actions: Actions = {
     const token = data.get('token');
     const comment = data.get('comment');
     const postId = data.get('postId')
+
+    const body = new URLSearchParams({
+      secret: key,
+      response: token as string,
+      sitekey: siteKey
+    })
+
     const response = await fetch('https://hcaptcha.com/siteverify', {
       method: 'POST',
       credentials: 'omit',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({ "secret": key, "response": token, "sitekey": siteKey})
+      body,
     });
 
 
