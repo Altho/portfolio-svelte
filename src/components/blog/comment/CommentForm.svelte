@@ -16,7 +16,6 @@
         captcha.reset();
     }
     const handleSuccess = (payload) => {
-        console.log(payload)
         token = payload.detail.token
         disabled = false;
     }

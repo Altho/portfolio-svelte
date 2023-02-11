@@ -16,7 +16,6 @@ export async function load({params}) {
 
 export const actions: Actions = {
   sendComment: async ({request}) => {
-    console.log('sendcomment')
 
     const data = await request.formData();
     const name = data.get('name');
@@ -41,9 +40,7 @@ export const actions: Actions = {
 
 
     const res = await response.json();
-    console.log(res, 'response')
     const {success} = res;
-    console.log('data: ', res);
     if (success && comment && name) {
       await supabase
         .from('comments')

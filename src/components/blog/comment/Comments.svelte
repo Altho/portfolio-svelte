@@ -11,7 +11,6 @@
         const {data} = await supabase.from("comments").select("id, name, comment, created_at").eq('blog_id', blogId).order('created_at', {ascending: false});
         comments.set(data)
 
-        console.log($comments)
 
         const condition = 'blog_id=eq.' + blogId
 
@@ -27,7 +26,6 @@
                 },
                 (payload) => {
                    $comments = [ payload.new, ...$comments];
-                    console.log($comments)
 
                 }
             )
