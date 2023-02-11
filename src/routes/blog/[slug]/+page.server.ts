@@ -21,7 +21,7 @@ export const actions: Actions = {
     const data = await request.formData();
     const name = data.get('name');
     const token = data.get('token');
-    const body = {response: token, secret: key, sitekey: siteKey};
+    const body = `RESPONSE=${token}&SECRET=${key}&SITEKEY=${siteKey}`
     console.log('about to verify captcha')
     console.log(body)
     const response = await fetch('https://hcaptcha.com/siteverify', {
@@ -30,7 +30,7 @@ export const actions: Actions = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: body.toString(),
+      body,
     });
     const comment = data.get('comment');
     const postId = data.get('postId')
