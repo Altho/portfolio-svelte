@@ -24,14 +24,14 @@
 
 <style lang="scss">
     .container {
-        color: #ececec;
+        color: black;
         padding: 15px;
 
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 10px;
       transition: 0.1s all ease-in-out;
-      background-color: #1C3041;
+      background-color: white;
       &:hover {
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
         cursor: pointer;
@@ -39,7 +39,7 @@
       }
       a {
         text-decoration: none;
-        color: #ececec;
+        color: black;
       }
     }
 

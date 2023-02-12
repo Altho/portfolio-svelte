@@ -61,7 +61,7 @@
                 <input name="email" type="email" id="email" required placeholder="Email" bind:value={email}/>
             </div>
         </div>
-        <div class="input-container">
+        <div id="form" class="input-container">
             <label for="message">Message <span>*</span> :</label>
             <textarea name="message" id="message" required bind:value={message}></textarea>
         </div>

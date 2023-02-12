@@ -29,7 +29,12 @@
 
     :root {
         background-color: #344966;
+
     }
+
+
+
+
 
     .app {
         min-height: 100vh;
@@ -45,7 +50,8 @@
         display: flex;
         flex-shrink: 0;
         flex-direction: column;
-        padding: 1rem;
+        padding: 0 1rem 1rem 1rem;
+
         width: 100%;
 
         max-width: 64rem;
@@ -63,7 +69,7 @@
     footer {
         max-width: 64rem;
         width: 100%;
-        padding: 1rem;
+        padding: 1rem ;
         box-sizing: border-box;
         transform: translateX(-50%);
         display: flex;
@@ -81,6 +87,10 @@
     }
     footer a {
         font-weight: bold;
+    }
+
+    :global(body) {
+        margin: 0;
     }
 
 </style>
