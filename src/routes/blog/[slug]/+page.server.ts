@@ -8,7 +8,7 @@ const key: string = PRIVATE_CAPTCHA_KEY
 const siteKey: string = PUBLIC_SITEKEY
 
 export async function load({params}) {
-  const post = await supabase.from("blog").select('content, title, id, created_at, slug').eq('slug', params.slug).single();
+  const post = await supabase.from("blog").select('content,title, id, created_at, slug').eq('slug', params.slug).single();
   return {
     post: post.data
   };

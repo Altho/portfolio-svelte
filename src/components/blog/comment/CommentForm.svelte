@@ -117,9 +117,15 @@
       cursor: pointer;
       border-radius: 5px;
       transition: 0.2s all ease-in-out;
+      margin-bottom: 20px;
 
-      &:hover {
+      &:hover:enabled {
         scale: 1.05;
+      }
+
+      &:disabled {
+        border: none;
+        cursor: unset;
       }
     }
   }

@@ -7,6 +7,7 @@
     dayjs.extend(relativeTime)
     export let data;
     const date = dayjs(data.created_at).fromNow();
+    console.log(data)
 
 
 </script>

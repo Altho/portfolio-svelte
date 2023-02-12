@@ -9,7 +9,7 @@
 
 
     onMount(async () => {
-        const {data} = await supabase.from("blog").select('content, title, id, created_at, slug').order('created_at', {ascending: false});
+        const {data} = await supabase.from("blog").select('content,intro, title, id, created_at, slug').order('created_at', {ascending: false});
         posts.set(data);
     })
 </script>

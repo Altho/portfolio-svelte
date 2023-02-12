@@ -9,6 +9,7 @@
 
     onMount(async () => {
         const {data} = await supabase.from("comments").select("id, name, comment, created_at").eq('blog_id', blogId).order('created_at', {ascending: false});
+        console.log(data)
         comments.set(data)
 
 

@@ -3,11 +3,11 @@
     import dayjs from 'dayjs'
     import relativeTime from 'dayjs/plugin/relativeTime';
     dayjs.extend(relativeTime)
-
+    console.log(infos)
     const date = dayjs(infos.created_at).fromNow();
-    const preview = infos.content.slice(0, 100);
+    const preview = infos.intro.slice(0, 100);
     if(preview.length > 100) {
-        infos.content = preview + '...';
+        infos.intro = preview + '...';
     }
 
 </script>
