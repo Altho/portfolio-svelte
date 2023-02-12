@@ -3,13 +3,33 @@
     import {supabase} from "$lib/client";
     import {writable} from "svelte/store";
     import Comment from "./Comment.svelte";
+
     export let blogId;
+    let commentsAmount;
 
     const comments = writable([])
+    let from = 10;
+    let to = 20;
+
+    const getMoreComments = async () => {
+        const {
+            data
+        } = await supabase.from("comments").select("id, name, comment, created_at").eq('blog_id', blogId).range(from, to).order('created_at', {ascending: false});
+        data.forEach(c => {
+            $comments = [...$comments, c];
+        })
+
+        console.log($comments)
+        from = from + 11;
+        to = from + 10;
+    }
 
     onMount(async () => {
-        const {data} = await supabase.from("comments").select("id, name, comment, created_at").eq('blog_id', blogId).order('created_at', {ascending: false});
-        console.log(data)
+        const {data, count} = await supabase.from("comments").select("id, name, comment, created_at", {
+            count: 'exact'
+        }).eq('blog_id', blogId).range(0, 9).order('created_at', {ascending: false});
+        console.log(count, "count")
+        commentsAmount = count;
         comments.set(data)
 
 
@@ -26,7 +46,7 @@
                     filter: condition,
                 },
                 (payload) => {
-                   $comments = [ payload.new, ...$comments];
+                    $comments = [payload.new, ...$comments];
 
                 }
             )
@@ -38,18 +58,22 @@
 </script>
 
 <div class="container">
+    {#if $comments}
+        {#each $comments as comment (comment.id)}
+            <Comment data={comment}/>
 
-    {#each $comments as comment (comment.id)}
+        {/each}
+        {#if commentsAmount > from}
+            <button on:click={getMoreComments}>Load more comments</button>
 
-        <Comment data={comment} />
-
-    {/each}
+        {/if}
+    {/if}
 
 </div>
 
 <style lang="scss">
-    .container {
-      margin-top: 20px;
-      box-sizing: border-box;
-    }
+  .container {
+    margin-top: 20px;
+    box-sizing: border-box;
+  }
 </style>
