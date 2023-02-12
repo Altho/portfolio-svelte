@@ -75,5 +75,10 @@
   .container {
     margin-top: 20px;
     box-sizing: border-box;
+
+    button {
+      all: unset;
+      cursor: pointer;
+    }
   }
 </style>
