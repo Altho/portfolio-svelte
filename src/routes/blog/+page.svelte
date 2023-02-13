@@ -6,11 +6,18 @@
     import {posts} from "../../lib/stores";
     import Preview from "../../components/blog/preview/Preview.svelte";
     import '../../styles/markdown.scss'
+    import ButtonContainer from "../../components/pagination/ButtonContainer.svelte";
+
+    let postsAmount;
 
 
     onMount(async () => {
-        const {data} = await supabase.from("blog").select('content,intro, title, id, created_at, slug').order('created_at', {ascending: false});
+        const {data, count} = await supabase.from("blog").select('content,intro, title, id, created_at, slug', {
+            count: 'exact'
+        }).order('created_at', {ascending: false});
         posts.set(data);
+        postsAmount = count
+        console.log(postsAmount)
     })
 </script>
 
@@ -22,6 +29,7 @@
     {/each}
 
 </Page>
+<ButtonContainer count={postsAmount} />
 
 <style>
 </style>
