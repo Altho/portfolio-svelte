@@ -1,7 +1,6 @@
 <script lang="ts">
     import Header from '../components/Header.svelte';
     const year = new Date().getFullYear()
-    import { fade, blur, fly, slide, scale } from "svelte/transition";
 
 </script>
 
@@ -19,14 +18,12 @@
             <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img width="50" src="/images/icons/socials/mastodon.svg" alt="mastodon"/></a>
             <a target="_blank" href="https://github.com/Altho" ><img src="/images/icons/socials/github.svg" alt="github" width="50"/></a>
             <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img src="/images/icons/socials/linkedin.svg" alt="linkedin" width="50"/></a>
-
         </div>
     </footer>
 </div>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
-
     :root {
         background-color: #344966;
 

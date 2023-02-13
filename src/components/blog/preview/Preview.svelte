@@ -1,6 +1,6 @@
 <script>
     export let infos;
-    import dayjs from 'dayjs'
+    import dayjs from 'dayjs';
     import relativeTime from 'dayjs/plugin/relativeTime';
     dayjs.extend(relativeTime)
     console.log(infos)

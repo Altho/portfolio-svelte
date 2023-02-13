@@ -3,14 +3,13 @@
     import Markdown from 'svelte-exmarkdown';
     import {gfmPlugin} from 'svelte-exmarkdown/gfm';
     import '../../../styles/markdown.scss'
-    import {Highlight} from "svelte-highlight";
-    import typescript from "svelte-highlight/languages/typescript";
     import Comments from "../../../components/blog/comment/Comments.svelte";
     import CommentForm from "../../../components/blog/comment/CommentForm.svelte";
-    import Back from "../../../components/nav/Back.svelte";
     import PostHeader from "../../../components/blog/page/PostHeader.svelte";
 
     export let data;
+
+    console.log(data)
     const infos = {title: data.post.title, date:data.post.created_at}
     let md = data.post.content
 

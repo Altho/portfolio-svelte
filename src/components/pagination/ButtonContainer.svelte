@@ -1,31 +1,57 @@
-<script>
+<script lang="ts">
     import PageButton from "./PageButton.svelte";
-    import {onMount} from "svelte";
-    import {writable} from "svelte/store";
+    import {pages} from "$lib/stores";
+    export let currentPage;
 
-    export let count;
-    const itemsPerPage = 5;
+    $: actualPage = currentPage
 
-    const pages = writable([])
+    console.log("---")
 
 
-    onMount(() => {
-        const pagesResult = Math.ceil(count / itemsPerPage);
-        console.log("mount")
-        console.log(pagesResult,"urur")
-        for(let i = 0; i < pagesResult; i++) {
-            $pages = [...$pages, {number:i}]
-            console.log(i)
-        }
-    })
+    const isTherePrevPage = () => {
+        console.log(actualPage)
+        console.log(actualPage - 1 > 0)
+        return actualPage - 1 > 0;
+    }
+
+    const isThereNextPage = () => {
+        console.log(actualPage + 1 <= $pages)
+        return actualPage + 1 <= $pages;
+    }
+
+
 
 
 </script>
 
 <div class="container">
-    {#await count}
-    {#each $pages as page}
-        <PageButton number="g"/>
-    {/each}
-        {/await}
+    {#if $pages}
+        {#if isTherePrevPage()}
+            <PageButton direction="prev" number={parseInt(currentPage) - 1 }/>
+        {/if}
+        <div class="current-page">{currentPage}</div>
+        {#if isThereNextPage()}
+            <PageButton direction="next" number={parseInt(currentPage) + 1 }/>
+        {/if}
+    {/if}
+
 </div>
+
+<style lang="scss">
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        .current-page {
+            font-size: 2rem;
+            font-weight: 600;
+          display: flex;
+          justify-content: center;
+          width: 40px;
+          border: 3px solid black;
+          border-radius: 50%;
+        }
+    }
+</style>
