@@ -14,17 +14,14 @@ export const actions: Actions = {
         const data = await request.formData();
 
         const email = data.get('email');
-        console.log(email);
         if (!email) {
             throw new Error('email is required');
         }
         const name = data.get('name');
-        console.log(name);
         if (!name) {
             throw new Error('Name is required')
         }
         const message = data.get('message');
-        console.log(message);
         if (!message) {
             throw new Error('Message is required')
         }

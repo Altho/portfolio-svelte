@@ -2,7 +2,7 @@
 
     import Page from "../../components/blog/page/Page.svelte";
     import {onMount} from "svelte";
-    import {posts, pages} from "../../lib/stores";
+    import {posts, pages, currentPage} from "../../lib/stores";
     import Preview from "../../components/blog/preview/Preview.svelte";
     import ButtonContainer from "../../components/pagination/ButtonContainer.svelte";
 
@@ -13,6 +13,9 @@
     $: {
         posts.set(data.props.data);
         pages.set(data.props.pageAmount)
+        console.log('setting current page to' + ' ' + data.props.currentPage)
+        currentPage.set(data.props.currentPage)
+        console.log($currentPage)
     }
 
 
@@ -27,7 +30,7 @@
     {/each}
 
 </Page>
-<ButtonContainer currentPage={data.props.currentPage}/>
+<ButtonContainer />
 
 <style>
 </style>

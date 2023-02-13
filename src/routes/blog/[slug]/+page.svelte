@@ -9,7 +9,6 @@
 
     export let data;
 
-    console.log(data)
     const infos = {title: data.post.title, date:data.post.created_at}
     let md = data.post.content
 

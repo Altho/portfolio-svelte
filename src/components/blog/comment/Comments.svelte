@@ -19,7 +19,6 @@
             $comments = [...$comments, c];
         })
 
-        console.log($comments)
         from = from + 11;
         to = from + 10;
     }
@@ -28,7 +27,6 @@
         const {data, count} = await supabase.from("comments").select("id, name, comment, created_at", {
             count: 'exact'
         }).eq('blog_id', blogId).range(0, 9).order('created_at', {ascending: false});
-        console.log(count, "count")
         commentsAmount = count;
         comments.set(data)
 

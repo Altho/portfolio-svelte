@@ -27,7 +27,7 @@
         isGoingLeft = true;
         if (endIndex === 1) {
             const ceiling = Math.ceil(storeLength / 1)
-            startIndex = ceiling - 2;
+            startIndex = ceiling - 1;
             endIndex = ceiling;
             displayed.set(proficiencies.slice(startIndex, endIndex));
         } else {

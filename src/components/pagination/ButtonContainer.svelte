@@ -1,23 +1,17 @@
 <script lang="ts">
     import PageButton from "./PageButton.svelte";
-    import {pages} from "$lib/stores";
-    export let currentPage;
+    import {pages, currentPage} from "$lib/stores";
 
-    $: actualPage = currentPage
-
-    console.log("---")
+    $: page = $currentPage
+    $: maxPage = $pages;
 
 
-    const isTherePrevPage = () => {
-        console.log(actualPage)
-        console.log(actualPage - 1 > 0)
-        return actualPage - 1 > 0;
-    }
 
-    const isThereNextPage = () => {
-        console.log(actualPage + 1 <= $pages)
-        return actualPage + 1 <= $pages;
-    }
+   $: {
+    console.log('current page front', page)
+   }
+
+
 
 
 
@@ -26,12 +20,18 @@
 
 <div class="container">
     {#if $pages}
-        {#if isTherePrevPage()}
-            <PageButton direction="prev" number={parseInt(currentPage) - 1 }/>
+        {#if page > 2 }
+            <PageButton direction="first" number='1'/>
         {/if}
-        <div class="current-page">{currentPage}</div>
-        {#if isThereNextPage()}
-            <PageButton direction="next" number={parseInt(currentPage) + 1 }/>
+        {#if page - 1 > 0}
+            <PageButton direction="prev" number={page - 1 }/>
+        {/if}
+        <div class="current-page">{page}</div>
+        {#if page + 1 <= $pages}
+            <PageButton direction="next" number={page + 1 }/>
+        {/if}
+        {#if page <= maxPage - 2}
+            <PageButton direction="last" number={maxPage}/>
         {/if}
     {/if}
 
@@ -40,18 +40,22 @@
 <style lang="scss">
     .container {
         display: flex;
+      margin-top: 20px;
         justify-content: center;
+        position: relative;
         align-items: center;
         height: 100%;
         width: 100%;
         .current-page {
+          filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
             font-size: 2rem;
             font-weight: 600;
           display: flex;
           justify-content: center;
           width: 40px;
-          border: 3px solid black;
-          border-radius: 50%;
         }
     }
 </style>
