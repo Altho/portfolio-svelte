@@ -25,7 +25,15 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
     :root {
-        background-color: #344966;
+        background: #2b5876;
+        background: -webkit-linear-gradient(to bottom, #4e4376, #2b5876);
+        background: linear-gradient(to bottom, #4e4376, #2b5876);
+
+
+
+
+
+
 
     }
 

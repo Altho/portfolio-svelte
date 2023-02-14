@@ -41,9 +41,11 @@
         all: unset;
         background-color: transparent;
         filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+        transition: all 0.2s ease-in-out;
 
         &:hover {
           cursor: pointer;
+          scale:1.05;
         }
 
 

@@ -23,7 +23,10 @@
 </svelte:head>
 
 <Welcome/>
-<Intro/>
+<Intro>I am a fullstack web developer. I like to use web development in order to solve
+    all kind of problems. I'm familiar with Node.js (with Typescript) on the backend although I'm always
+    curious about new languages (I have recently been experimenting with Rust !) and technologies.
+    In the end I love learning whatever tool is required to get the job done.</Intro>
 {#if $width > 900}
     <Proficiencies/>
 {:else}

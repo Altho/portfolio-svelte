@@ -30,9 +30,18 @@
         height: 100vh;
         padding: 20px;
         display: flex;
+        font-family: "Exo 2", sans-serif;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        left: 50%;
+
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
     .main {
         font-size: 3rem;

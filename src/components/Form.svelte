@@ -100,7 +100,6 @@
     width: 100%;
     height: 30px;
     border-radius: 5px;
-    background-color: #344966;
     border: 2px solid #1C3041;
     transition: all 0.2s ease-in-out;
     margin-bottom: 10px;
@@ -116,7 +115,6 @@
     height: 100px;
     margin-bottom: 20px;
     border-radius: 5px;
-    background-color: #344966;
     border: 2px solid #1C3041;
     transition: all 0.2s ease-in-out;
 
@@ -143,7 +141,7 @@
 
 
   button {
-    background-color: #344966;
+    background-color: transparent;
     border: 2px solid #0D1821;
     width: 200px;
     color: #0D1821;

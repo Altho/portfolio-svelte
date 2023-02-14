@@ -8,7 +8,7 @@
 
 <header>
 
-    <nav >
+    <nav>
 
         <ul class:scrolled={y >= 10}>
             <li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
@@ -48,13 +48,11 @@
     a {
       color: black;
     }
+
     li[aria-current='page'] {
       border: black 2px solid;
     }
   }
-
-
-
 
 
   nav {
@@ -83,6 +81,8 @@
     justify-content: center;
     align-items: center;
     list-style: none;
+    gap: 5px;
+
     background-size: contain;
   }
 
@@ -93,8 +93,7 @@
     align-items: center;
 
     &:hover {
-      border-radius: 5px;
-      background-color: #26394d;
+      text-shadow: 2px 5px 5px rgba(0,0,0,0.86);
     }
   }
 
@@ -117,7 +116,5 @@
     transition: color 0.2s linear;
   }
 
-  a:hover {
-    color: var(--color-theme-1);
-  }
+
 </style>
