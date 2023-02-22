@@ -17,6 +17,9 @@
 
 <Page>
     <PostHeader data={infos} />
+    <div class="header">
+        {data.post.title}
+    </div>
     <div class="styled-from-outside">
             <Markdown {md} plugins={[gfmPlugin]}/>
     </div>
@@ -24,6 +27,14 @@
 <CommentForm postId={data.post.id}/>
 <Comments blogId={data.post.id}/>
 
+<style>
+    .header {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 20px 0;
+        text-align: center;
+    }
+</style>
 
 
 
