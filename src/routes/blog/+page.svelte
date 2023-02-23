@@ -11,26 +11,32 @@
     $: postsStore = posts
 
     $: {
-        posts.set(data.props.data);
-        pages.set(data.props.pageAmount)
-        console.log('setting current page to' + ' ' + data.props.currentPage)
-        currentPage.set(data.props.currentPage)
-        console.log($currentPage)
-    }
 
+            posts.set(data.props.data);
+            pages.set(data.props.pageAmount)
+            console.log('setting current page to' + ' ' + data.props.currentPage)
+            currentPage.set(data.props.currentPage)
+            console.log($currentPage)
+
+    }
 
 
 </script>
 
 <Page>
-    {#each $postsStore as post (post.id)}
-        <Preview infos={post}/>
+    {#if $postsStore.length}
+        {#each $postsStore as post (post.id)}
+            <Preview infos={post}/>
+        {:else}
+            Loading...
+        {/each}
     {:else}
-        Loading...
-    {/each}
+        No posts found
+    {/if}
+
 
 </Page>
-<ButtonContainer />
+<ButtonContainer/>
 
 <style>
 </style>

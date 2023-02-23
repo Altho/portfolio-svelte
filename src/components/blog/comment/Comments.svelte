@@ -16,7 +16,9 @@
             data
         } = await supabase.from("comments").select("id, name, comment, created_at").eq('blog_id', blogId).range(from, to).order('created_at', {ascending: false});
         data.forEach(c => {
-            $comments = [...$comments, c];
+            if(c.length < 250) {
+                $comments = [...$comments, c];
+            }
         })
 
         from = from + 11;

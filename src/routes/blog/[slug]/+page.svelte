@@ -9,19 +9,22 @@
 
     export let data;
 
-    const infos = {title: data.post.title, date:data.post.created_at}
+    const infos = {title: data.post.title, date: data.post.created_at}
     let md = data.post.content
 
 </script>
 
+<svelte:head>
+    <title>{"Altho " + "-" + " " + data.post.title}</title>
+</svelte:head>
 
 <Page>
-    <PostHeader data={infos} />
+    <PostHeader data={infos}/>
     <div class="header">
         {data.post.title}
     </div>
     <div class="styled-from-outside">
-            <Markdown {md} plugins={[gfmPlugin]}/>
+        <Markdown {md} plugins={[gfmPlugin]}/>
     </div>
 </Page>
 <CommentForm postId={data.post.id}/>

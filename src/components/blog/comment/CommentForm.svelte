@@ -21,6 +21,7 @@
     }
 
     let success = false
+    let comment;
 
 </script>
 
@@ -44,11 +45,14 @@
         }
     }
 }}>
+
         Add a comment.
         <label for="name">Name: </label>
-        <input id="name" required type="text" name="name" placeholder="name">
+        <input id="name" required type="text" maxlength="30" name="name" placeholder="name">
         <label for="comment">Comment: </label>
-        <textarea id="comment" required name="comment" placeholder="name"></textarea>
+
+        <textarea id="comment" required name="comment" placeholder="Comment" maxlength="250" bind:value={comment}></textarea>
+        <div class="comment-limit">{250 - (comment?.length ?? 0)} characters left</div>
         <input type="hidden" name="postId" value={postId}/>
         <input type="hidden" name="token" value={token}/>
 
@@ -128,6 +132,12 @@
         cursor: unset;
       }
     }
+  }
+
+  .comment-limit {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #666666;
   }
 
 

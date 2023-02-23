@@ -41,7 +41,7 @@ export const actions: Actions = {
 
     const res = await response.json();
     const {success} = res;
-    if (success && comment && name) {
+    if (success && comment && name && comment.length < 250) {
       await supabase
         .from('comments')
         .insert({name, comment, blog_id: postId})

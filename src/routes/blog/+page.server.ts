@@ -9,13 +9,10 @@ export async function load({url}) {
     const to = from + itemsPerPage - 1;
     const {data, count} = await supabase.from("blog").select('content,intro, title, id, created_at, slug', {
         count: 'exact'
-    }).range(from, to).order('created_at', {ascending: false});
+    }).range(from, to).eq("published", true).order('created_at', {ascending: false});
     const pageAmount = Math.ceil(count as number / itemsPerPage)
     console.log('server pageamount', pageAmount)
     console.log('server current page', currentPage)
-    if(currentPage > count ) {
-        throw new Error('404')
-    } else {
         return {
             props: {
                 currentPage,
@@ -24,6 +21,5 @@ export async function load({url}) {
 
             }
         };
-    }
 
 }
