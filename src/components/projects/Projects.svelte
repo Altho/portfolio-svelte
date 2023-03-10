@@ -6,6 +6,8 @@
     import Title from "../Title.svelte";
     import Project from "./Project.svelte";
     import {innerWidth} from "../../lib/stores";
+    import Skeleton from "../Skeleton.svelte";
+    import MobileProject from "./MobileProject.svelte";
 
     type Proficiency = {
         id: number,
@@ -19,6 +21,7 @@
     let endIndex;
     let storeLength;
     let isGoingLeft;
+    let isLoaded = false;
 
     let width;
     $: width = innerWidth;
@@ -88,36 +91,49 @@
                 console.log(proj)
             }
         }
+        isLoaded = true;
     });
 
 
 </script>
 
-<section >
+<section>
 
 
     <Title>PROJECTS</Title>
     <div class="frame">
         <div class="container">
             {#if $width > 1200}
-            <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
+                <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
 
-            {#each $displayed as proj (proj.id)}
-                <Project direction={isGoingLeft} projects={proj}/>
-            {/each}
-            <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button>
+                {#if isLoaded}
+                    {#each $displayed as proj (proj.id)}
+                        <Project direction={isGoingLeft} projects={proj}/>
+                    {/each}
+                {:else}
+                    <Skeleton width="350" height="600" radius="5" />
+                    <Skeleton width="350" height="600" radius="5" />
+                {/if}
+                <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg">
+                </button>
             {:else}
 
-                <div class=mobile-buttons><button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
-                    <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg"></button></div>
+                <div class=mobile-buttons>
+                    <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
+                    <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg">
+                    </button>
+                </div>
 
 
-                {#each $displayed as proj (proj.id)}
-                    <Project direction={isGoingLeft} projects={proj}/>
-                    {:else}
-                    loading...
-                {/each}
+                {#if isLoaded}
+                    {#each $displayed as proj, i (proj.id)}
+                        <MobileProject direction={isGoingLeft} projects={proj} i={i}/>
+                    {/each}
+                {:else}
+                    <Skeleton width="350" height="600" radius="5" />
                 {/if}
+
+            {/if}
 
         </div>
     </div>
@@ -126,7 +142,6 @@
 
 
 <style lang="scss">
-
 
 
   .container {
@@ -199,10 +214,12 @@
     width: 100%;
   }
 
+
+
   @media (max-width: 900px) {
 
     .container {
-     width:90%;
+      width: 90%;
     }
 
     .frame {

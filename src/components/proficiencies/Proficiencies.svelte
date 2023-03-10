@@ -7,6 +7,7 @@
   import Title from "../Title.svelte";
   import {innerWidth} from "../../lib/stores";
   import CardSkeleton from "./CardSkeleton.svelte";
+  import Skeleton from "../Skeleton.svelte";
   type Proficiency = {
     id: number,
     name: string,
@@ -72,10 +73,10 @@
                 {#each $displayed as prof (prof.id)}
                     <Card direction={isGoingLeft} prof={prof}/>
                 {:else}
-                    <CardSkeleton />
-                    <CardSkeleton />
-                    <CardSkeleton />
-                    <CardSkeleton />
+                    <Skeleton width="400" height="200" radius="5" />
+                    <Skeleton width="400" height="200" radius="5" />
+                    <Skeleton width="400" height="200" radius="5" />
+                    <Skeleton width="400" height="200" radius="5" />
                 {/each}
                 <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg">
                 </button>

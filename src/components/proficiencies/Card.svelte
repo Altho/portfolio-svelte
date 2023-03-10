@@ -93,7 +93,8 @@
 
 
     .text {
-      overflow: scroll;
+      overflow-y: scroll;
+      overflow-x: hidden;
       //transition: all 0.2s ease-in-out;
     }
 

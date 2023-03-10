@@ -50,6 +50,8 @@
     </div>
     <div class="text" >
         <p>{projects.content}</p>
+        <a class="visit" target="_blank" href={projects.url}>VISIT</a>
+
     </div>
     {#if projects.technologies}
 
