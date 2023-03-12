@@ -161,7 +161,7 @@
 
           .flip-box {
             background-color: transparent;
-            width: 75vw;
+            //width: 75vw;
 
             margin: 0 20px 40px;
             perspective: 1000px; /* Remove this if you don't want the 3D effect */
@@ -169,31 +169,25 @@
 
           }
 
-          /* This container is needed to position the front and back side */
           .flip-box-inner {
             //position: relative;
             width: 100%;
             text-align: center;
+            box-sizing: border-box;
             transition: transform 0.8s;
             transform-style: preserve-3d;
 
           }
 
-          /* Do an horizontal flip when you move the mouse over the flip box container */
-          /* 	.flip-box:hover .flip-box-inner {
-                  transform: rotateY(180deg);
-              } */
-
           .show-back {
             transform: rotateY(180deg);
           }
 
-          /* Position the front and back side */
           .flip-box-front, .flip-box-back {
             position: absolute;
             width: 100%;
             height: 100%;
-            -webkit-backface-visibility: hidden; /* Safari */
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border:5px solid #4b6d8e;
 
@@ -201,13 +195,11 @@
 
           }
 
-          /* Style the front side */
           .flip-box-front {
 
             height: 100%;
           }
 
-          /* Style the back side */
           .flip-box-back {
             display: flex;
             background: linear-gradient(to bottom, #bdc3c7, #2c3e50);

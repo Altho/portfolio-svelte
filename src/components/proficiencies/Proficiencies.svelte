@@ -8,6 +8,7 @@
   import {innerWidth} from "../../lib/stores";
   import CardSkeleton from "./CardSkeleton.svelte";
   import Skeleton from "../Skeleton.svelte";
+
   type Proficiency = {
     id: number,
     name: string,
@@ -24,6 +25,7 @@
   const proficienciesStore = writable<Proficiency[]>([]);
   const proficiencies = [];
   const displayed = writable<Proficiency[]>([])
+
   function prev() {
     console.log(isGoingLeft)
     if (storeLength < 4) return;
@@ -40,6 +42,7 @@
     }
     console.log(isGoingLeft)
   }
+
   function next() {
     console.log(isGoingLeft)
     isGoingLeft = false;
@@ -54,6 +57,7 @@
     }
     console.log(isGoingLeft)
   }
+
   onMount(async () => {
     const {data} = await supabase.from("proficiencies").select("id, name, content, img, color").order('id');
     proficiencies.push(...(data as Proficiency[]));
@@ -73,10 +77,10 @@
                 {#each $displayed as prof (prof.id)}
                     <Card direction={isGoingLeft} prof={prof}/>
                 {:else}
-                    <Skeleton width="400" height="200" radius="5" />
-                    <Skeleton width="400" height="200" radius="5" />
-                    <Skeleton width="400" height="200" radius="5" />
-                    <Skeleton width="400" height="200" radius="5" />
+                    <Skeleton width="400" height="200" radius="5"/>
+                    <Skeleton width="400" height="200" radius="5"/>
+                    <Skeleton width="400" height="200" radius="5"/>
+                    <Skeleton width="400" height="200" radius="5"/>
                 {/each}
                 <button class="right" on:click={next}><img class="arrow-right" width="50" src="/images/arrow.svg">
                 </button>
@@ -104,6 +108,7 @@
   section {
     //height: 100vh;
   }
+
   .container {
     width: 100%;
     padding: 20px;
@@ -112,12 +117,15 @@
     flex-wrap: wrap;
     gap: 20px;
   }
+
   .frame {
     display: flex;
     position: relative;
     justify-content: center;
     //height: 80vh;
     button {
+      display: flex;
+      justify-content: center;
       position: absolute;
       width: 50px;
       top: 50%;
@@ -125,27 +133,33 @@
       cursor: pointer;
       background-color: transparent;
       border: none;
+
       img {
         transition: all 0.2s ease-in-out;
       }
     }
+
     button:hover {
       img {
         transform: scale(1.2);
         transition: all 0.2s ease-in-out;
       }
+
       .arrow-right {
         transform: scale(1.2) rotate(180deg);
         transition: all 0.2s ease-in-out;
       }
     }
+
     .right {
       right: -30px;
     }
+
     .left {
       left: 0;
     }
   }
+
   .mobile-buttons {
     display: flex;
     justify-content: space-evenly;
@@ -153,13 +167,16 @@
     gap: 50px;
     width: 100%;
   }
+
   .arrow-right {
     transform: rotate(180deg);
   }
+
   .main {
     font-size: 3rem;
     font-weight: 700;
   }
+
   @media (max-width: 900px) {
     .frame {
       button {

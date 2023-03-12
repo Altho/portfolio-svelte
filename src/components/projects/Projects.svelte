@@ -219,12 +219,17 @@
   @media (max-width: 900px) {
 
     .container {
-      width: 90%;
+      //width: 90%;
+      margin-bottom: 0;
+      box-sizing: border-box;
+      padding: 0   ;
     }
 
     .frame {
       button {
         position: relative;
+        display: flex;
+        justify-content: center;
       }
     }
 
