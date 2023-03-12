@@ -74,9 +74,11 @@
 
         <style lang="scss">
           .card {
-
+            position: relative;
             border-radius: 15px;
             box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            background-size: cover;
+
 
 
 
@@ -90,6 +92,7 @@
             text-transform: uppercase;
             color:black;
             top: 20px;
+            margin-bottom: 0;
             font-weight: bold;
             font-size: 1.5em;
 
@@ -102,6 +105,8 @@
 
           .description {
             padding: 5px;
+            max-height: 200px;
+            overflow: scroll;
           }
 
 
@@ -128,7 +133,7 @@
             align-items: center;
             background-color: #1C3041;
             border-radius: 20px 20px 0 0;
-            width: 70%;
+            width: 80%;
             height: 100%;
             box-shadow: 0px -4px 6px 1px rgba(0, 0, 0, 0.95)
 
@@ -156,10 +161,12 @@
 
           .flip-box {
             background-color: transparent;
-            width: 80vw;
+            width: 75vw;
 
             margin: 0 20px 40px;
             perspective: 1000px; /* Remove this if you don't want the 3D effect */
+
+
           }
 
           /* This container is needed to position the front and back side */
@@ -169,6 +176,7 @@
             text-align: center;
             transition: transform 0.8s;
             transform-style: preserve-3d;
+
           }
 
           /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -187,6 +195,10 @@
             height: 100%;
             -webkit-backface-visibility: hidden; /* Safari */
             backface-visibility: hidden;
+            border:5px solid #4b6d8e;
+
+
+
           }
 
           /* Style the front side */

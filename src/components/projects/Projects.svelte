@@ -103,7 +103,7 @@
     <Title>PROJECTS</Title>
     <div class="frame">
         <div class="container">
-            {#if $width > 1200}
+            {#if $width > 900}
                 <button class="left" on:click={prev}><img width="50" src="/images/arrow.svg"></button>
 
                 {#if isLoaded}
@@ -208,7 +208,7 @@
 
   .mobile-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     gap: 50px;
     width: 100%;

@@ -148,7 +148,7 @@
   }
   .mobile-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     gap: 50px;
     width: 100%;

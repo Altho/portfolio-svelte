@@ -11,6 +11,7 @@
     export let direction;
 
     console.log(projects)
+    let hover = false;
 
 
     const y = spring(95, {
@@ -21,10 +22,12 @@
 
     const mouseEnter = () => {
         y.set(5);
+        hover = true;
     }
 
     const mouseLeaves = () => {
         y.set(95);
+        hover = false;
     }
 
     const getDirection = () => {
@@ -50,7 +53,10 @@
     </div>
     <div class="text" >
         <p>{projects.content}</p>
-        <a class="visit" target="_blank" href={projects.url}>VISIT</a>
+        {#if hover}
+            <a class="visit" target="_blank" href={projects.url}>VISIT</a>
+
+        {/if}
 
     </div>
     {#if projects.technologies}
@@ -107,6 +113,24 @@
 
   }
 
+  .visit {
+    text-decoration: none;
+    background: #bdc3c7;
+
+    color: #2c3e50;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    &:hover{
+      background: #2c3e50;
+      color: #bdc3c7;
+      box-shadow:  0px 0px 0px 2px #bdc3c7, 0px 0px 0px 4px #2c3e50;
+    }
+  }
+
   .tech-container {
     position: absolute;
     display: flex;
@@ -143,6 +167,8 @@
     transition: all 0.2s ease-in-out;
     overflow-x: scroll;
     max-height: 500px;
+    width: 100%;
+    box-sizing: border-box;
     color: white;
     background: fixed;
     -ms-overflow-style: none;  /* IE and Edge */
