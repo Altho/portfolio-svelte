@@ -161,7 +161,7 @@
 
           .flip-box {
             background-color: transparent;
-            //width: 75vw;
+            width: 85vw;
 
             margin: 0 20px 40px;
             perspective: 1000px; /* Remove this if you don't want the 3D effect */
