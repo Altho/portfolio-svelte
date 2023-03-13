@@ -1,16 +1,19 @@
 <script lang="ts">
 
 
-
     export let projects
     import {fly, fade} from 'svelte/transition';
     import {supabase} from "$lib/client.ts";
     import {writable} from "svelte/store";
     import {spring} from "svelte/motion";
     import {cubicOut, bounceInOut} from "svelte/easing";
-    export let direction;
 
-    console.log(projects)
+    export let direction;
+    import Markdown from 'svelte-exmarkdown';
+    import {gfmPlugin} from 'svelte-exmarkdown/gfm';
+    import '../../styles/markdown.scss'
+
+    let md = projects.content
     let hover = false;
 
 
@@ -31,7 +34,7 @@
     }
 
     const getDirection = () => {
-        if (direction ) {
+        if (direction) {
             return -600
         } else {
             return 600
@@ -47,25 +50,28 @@
         on:mouseenter={mouseEnter}
         on:mouseleave={mouseLeaves}
 >
-    <div class="superior" style="height:{$y}%; background-image: url({projects.image})" >
+    <div class="superior" style="height:{$y}%; background-image: url({projects.image})">
 
 
     </div>
-    <div class="text" >
-        <p>{projects.content}</p>
+
+    <div class="text">
+        <div class="project">
+            <Markdown {md} plugins={[gfmPlugin]}/>
+        </div>
         {#if hover}
-            <a class="visit" target="_blank" href={projects.url}>VISIT</a>
-
+            <a class="visit" rel="noreferrer" target="_blank" href={projects.url}>VISIT</a>
         {/if}
-
     </div>
+
+
     {#if projects.technologies}
 
         <div class="tech-container">
             <div class="technologies">
                 {#each projects.technologies as tech (tech.id)}
                     <img alt="tech logo" src={tech.logo}>
-                    {:else}
+                {:else}
                     ..Loading
                 {/each}
             </div>
@@ -90,7 +96,6 @@
     transition: all 0.1s ease-in-out;
 
 
-
   }
 
   .name {
@@ -108,7 +113,7 @@
 
   .card:nth-child(odd) {
     .name {
-      right:0;
+      right: 0;
     }
 
   }
@@ -124,10 +129,11 @@
     transition: all 0.2s ease-in-out;
     display: flex;
     justify-content: center;
-    &:hover{
+
+    &:hover {
       background: #2c3e50;
       color: #bdc3c7;
-      box-shadow:  0px 0px 0px 2px #bdc3c7, 0px 0px 0px 4px #2c3e50;
+      box-shadow: 0px 0px 0px 2px #bdc3c7, 0px 0px 0px 4px #2c3e50;
     }
   }
 
@@ -136,7 +142,7 @@
     display: flex;
     justify-content: center;
     bottom: 0;
-    width:100%;
+    width: 100%;
     height: 100px;
 
     img {
@@ -156,26 +162,28 @@
     border-radius: 20px 20px 0 0;
     width: 70%;
     height: 100%;
-    box-shadow: 0px -4px 6px 1px rgba(0,0,0,0.95)
+    box-shadow: 0px -4px 6px 1px rgba(0, 0, 0, 0.95)
   }
 
   .text {
     position: absolute;
     z-index: 0;
-    bottom:80px;
+    bottom: 80px;
     padding: 20px;
     transition: all 0.2s ease-in-out;
     overflow-x: scroll;
-    max-height: 500px;
+    max-height: 400px;
     width: 100%;
     box-sizing: border-box;
     color: white;
     background: fixed;
-    -ms-overflow-style: none;  /* IE and Edge */
+    -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
+
     &::-webkit-scrollbar {
       display: none;
     }
+
     &::after {
       position: absolute;
       background-attachment: fixed;
@@ -185,8 +193,8 @@
       content: "";
       background: linear-gradient(to top,
               rgb(13, 24, 33) 20%,
-              rgba(255,255,255, 0) 80%
-      ) ;
+              rgba(255, 255, 255, 0) 80%
+      );
 
       pointer-events: none; /* so the text is still selectable */
     }
@@ -194,9 +202,8 @@
   }
 
 
-
   .superior {
-    clip-path: polygon(0% 0%, 100% 0%, 100%  64%, 0  80%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 64%, 0 80%);
     position: relative;
     z-index: 1;
     border-radius: 10px;
@@ -205,33 +212,33 @@
     height: 100%;
 
 
-
   }
 
   .card:hover {
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     transition: 0.2s all ease-in-out;
+
     .text {
       top: 20px;
     }
+
     .text:after {
       background: linear-gradient(to top,
               rgba(13, 24, 33, 0.08) 20%,
               rgba(13, 24, 33, 0.24) 80%
       );
     }
+
     .superior {
       clip-path: none;
-      border-radius: 10px 10px 0 0 ;
+      border-radius: 10px 10px 0 0;
       box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
       border-bottom: 3px solid #344966;
       background-color: #344966;
       opacity: 0.6;
     }
   }
-
-
 
 
   .card:nth-child(odd):hover {
@@ -249,10 +256,8 @@
   @media (max-width: 900px) {
 
     .card {
-      height:450px;
+      height: 450px;
     }
-
-
 
 
   }

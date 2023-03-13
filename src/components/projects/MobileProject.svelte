@@ -8,6 +8,9 @@
     import {writable} from "svelte/store";
     import {spring} from "svelte/motion";
     import {cubicOut, bounceInOut} from "svelte/easing";
+    import Markdown from 'svelte-exmarkdown';
+    import {gfmPlugin} from 'svelte-exmarkdown/gfm';
+    import '../../styles/markdown.scss'
     const options = {}
     export let i;
 
@@ -15,7 +18,8 @@
 
 
 
-    console.log(projects)
+    let md = projects.content
+
 
 
     const y = spring(95, {
@@ -48,8 +52,11 @@
 
         <div class="flip-box-back container"><div >
             <p class="name">{projects.name}</p>
-        </div><div class="content">
-            <p class="description">{projects.content}</p>
+
+            <div class="project content">
+                <Markdown {md} plugins={[gfmPlugin]}/>
+            </div>
+
             <a class="visit" target="_blank" href={projects.url}>VISIT</a>
             <div class="tech-container">
                 <div class="technologies">
@@ -99,8 +106,10 @@
           }
 
           .content {
-            height: 100%;
+            height: 80%;
             color:black;
+            overflow-y: scroll;
+            overflow-x: hidden;
           }
 
           .description {
