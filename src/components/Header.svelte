@@ -15,7 +15,7 @@
                 <a href="/">About</a>
             </li>
             <li aria-current={$page.url.pathname.startsWith('/resume') ? 'page' : undefined}>
-                <a href="/static">Resume</a>
+                <a href="/resume">Resume</a>
             </li>
             <li aria-current={$page.url.pathname.startsWith('/blog') ? 'page' : undefined}>
                 <a href="/blog">Blog</a>

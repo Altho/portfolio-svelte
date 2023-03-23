@@ -23,14 +23,15 @@
 
 <style lang="scss">
     .container {
-        color: black;
+        color: #fff;
         padding: 15px;
-
         border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 10px;
       transition: 0.1s all ease-in-out;
-      background-color: white;
       &:hover {
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
         cursor: pointer;
@@ -38,7 +39,7 @@
       }
       a {
         text-decoration: none;
-        color: black;
+        color: #fff;
       }
     }
 
