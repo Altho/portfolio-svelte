@@ -57,7 +57,7 @@
                 <Markdown {md} plugins={[gfmPlugin]}/>
             </div>
 
-            <a class="visit" target="_blank" href={projects.url}>VISIT</a>
+            <a class="visit" target="_blank" rel="noreferrer" href={projects.url}>VISIT</a>
             <div class="tech-container">
                 <div class="technologies">
                     {#each projects.technologies as tech (tech.id)}
@@ -106,7 +106,7 @@
           }
 
           .content {
-            height: 80%;
+            max-height: 250px;
             color:black;
             overflow-y: scroll;
             overflow-x: hidden;
@@ -153,6 +153,10 @@
           .visit {
             text-decoration: none;
             background: #bdc3c7;
+            position: absolute;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
 
             color: #2c3e50;
             font-weight: bold;

@@ -59,10 +59,12 @@
         <div class="project">
             <Markdown {md} plugins={[gfmPlugin]}/>
         </div>
-        {#if hover}
-            <a class="visit" rel="noreferrer" target="_blank" href={projects.url}>VISIT</a>
-        {/if}
+
     </div>
+    {#if hover}
+        <a class="visit" rel="noreferrer" target="_blank" href={projects.url}>VISIT</a>
+    {/if}
+
 
 
     {#if projects.technologies}
@@ -121,6 +123,10 @@
   .visit {
     text-decoration: none;
     background: #bdc3c7;
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
 
     color: #2c3e50;
     font-weight: bold;

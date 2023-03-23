@@ -43,7 +43,7 @@
     <div class="card"  on:mouseenter={mouseEnter} on:mouseleave={mouseLeave}>
         <div class="left-side">
             <div class="text">
-                Content: {prof.content}
+                {prof.content}
             </div>
         </div>
         <div class="right-side" style="background-color: {prof.color}; width:{$panel}%">
