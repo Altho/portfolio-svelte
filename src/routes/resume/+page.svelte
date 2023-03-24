@@ -1,10 +1,14 @@
 <script lang="ts">
     import Page from "../../components/blog/page/Page.svelte";
     import Job from "../../components/resume/Job.svelte";
+    import Degree from "../../components/resume/Degree.svelte";
 
     export let data;
 
-    const jobs = data.props.data
+    const jobs = data.props.experiences.data
+    const education = data.props.education.data
+
+    console.log(education)
 
 
 </script>
@@ -21,6 +25,11 @@
             <Job job={job}/>
         {/each}
     </div>
+    <div class="education">
+        {#each education as edu (edu.id)}
+            <Degree degree={edu}/>
+        {/each}
+    </div>
 </Page>
 
 <style lang="scss">
@@ -31,6 +40,7 @@
     justify-content: center;
     width: 100%;
     gap: 2rem;
+    margin: 2rem 0;
   }
   .summary {
     font-size: 1.2rem;
