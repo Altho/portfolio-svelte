@@ -2,11 +2,26 @@
     import Page from "../../components/blog/page/Page.svelte";
     import Job from "../../components/resume/Job.svelte";
     import Degree from "../../components/resume/Degree.svelte";
+    import Title from "../../components/resume/Title.svelte";
+    import { IconSchool } from '@tabler/icons-svelte';
+    import { IconMicroscope } from '@tabler/icons-svelte';
+    import { IconMusic } from '@tabler/icons-svelte';
+    import Personal from "../../components/resume/Personal.svelte";
+
+
+
+    const labelColor = {
+      education: '#783F8E',
+      experiences: '#4F1271',
+      hobbies: '#4A4063',
+    }
+
 
     export let data;
 
     const jobs = data.props.experiences.data
     const education = data.props.education.data
+    const personal = data.props.personal.data
 
     console.log(education)
 
@@ -20,23 +35,34 @@
         learn new things and share my knowledge with others. I enjoy working with Node.js and Typescript but I also have
         been using C# to write APIs.
     </div>
-    <div class="experiences">
+    <Title icon={IconMicroscope} color={labelColor.experiences} name="Experiences"></Title>
+    <div class="container">
         {#each jobs as job (job.id)}
             <Job job={job}/>
         {/each}
     </div>
-    <div class="education">
+    <Title name="Education" color={labelColor.education} icon={IconSchool}></Title>
+
+    <div class="container">
         {#each education as edu (edu.id)}
-            <Degree degree={edu}/>
+            <Degree degree={edu}></Degree>
         {/each}
     </div>
+
+    <Title name="Personal" color={labelColor.hobbies} icon={IconMusic}></Title>
+
+    <div class="container">
+        {#each personal as perso (perso.id)}
+            <Personal personal={perso} ></Personal>
+        {/each}
+    </div>
+
 </Page>
 
 <style lang="scss">
-  .experiences {
+  .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     width: 100%;
     gap: 2rem;
