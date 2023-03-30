@@ -25,11 +25,14 @@
 <style lang="scss">
   .comment {
     border-radius: 5px;
-    color: black;
-    border: 1px solid black;
+    color: white;
     margin-bottom: 10px;
+
     padding: 10px;
-    background-color:#ebeae8;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
   }
@@ -41,7 +44,7 @@
 
     .name {
       font-weight: bold;
-      color: #344966;
+      color: #8e179b;
     }
   }
 

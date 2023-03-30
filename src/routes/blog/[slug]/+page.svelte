@@ -32,8 +32,9 @@
         <Markdown {md} {plugins}/>
     </div>
 </Page>
-<CommentForm postId={data.post.id}/>
 <Comments blogId={data.post.id}/>
+<CommentForm postId={data.post.id}/>
+
 
 <style>
     .header {
