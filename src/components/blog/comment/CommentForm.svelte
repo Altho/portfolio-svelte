@@ -63,7 +63,7 @@
                     on:success={handleSuccess}
                     on:error={handleError}
             />
-            <button type="submit" on:submit={() => isSending = true} disabled={disabled}>Send</button>
+            <button type="submit" on:submit={() => isSending = true} disabled={disabled} >Send</button>
         </div>
 
     </form>
@@ -118,6 +118,11 @@
     gap: 20px;
 
     button {
+
+      background-color: transparent;
+        border: 3px solid #9827c3;
+      color: #9827c3;
+      font-weight: 600;
       width: 40%;
       height: 30px;
       text-transform: uppercase;
@@ -128,6 +133,10 @@
 
       &:hover:enabled {
         scale: 1.05;
+        background-color: #9827c3;
+        color: white;
+        border-color: #cc38ff;
+        box-shadow:  0 0 5px #9827c3, 0 0 15px #9827c3, 0 0 25px #9827c3, 0 0 25px #9827c3;
       }
 
       &:disabled {
