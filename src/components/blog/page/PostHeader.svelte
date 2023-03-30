@@ -25,6 +25,8 @@
     .infos {
       display: flex;
       flex-direction: column;
+        align-items: flex-end;
+      text-align: end;
     }
     .date {
       font-size: 12px;

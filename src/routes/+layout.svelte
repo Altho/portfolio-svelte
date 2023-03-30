@@ -1,41 +1,49 @@
 <script lang="ts">
-    import Header from '../components/Header.svelte';
-    const year = new Date().getFullYear()
+  import Header from '../components/Header.svelte';
+
+  const year = new Date().getFullYear()
+  import PageTransition from "../components/PageTransition.svelte";
+  import type {LayoutServerData} from './$types';
+
+  export let data: LayoutServerData;
 
 </script>
 
 
 <div class="app">
     <Header/>
-
     <main>
-        <slot/>
+        <PageTransition pathname={data.pathname}>
+
+            <slot/>
+
+        </PageTransition>
     </main>
+
 
     <footer>
         <div class="footer-container"><p>© {year} Altho </p></div>
         <div class="socials">
-            <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img width="50" src="/images/icons/socials/mastodon.svg" alt="mastodon"/></a>
-            <a target="_blank" href="https://github.com/Altho" ><img src="/images/icons/socials/github.svg" alt="github" width="50"/></a>
-            <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img src="/images/icons/socials/linkedin.svg" alt="linkedin" width="50"/></a>
+            <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img width="50"
+                                                                                              src="/images/icons/socials/mastodon.svg"
+                                                                                              alt="mastodon"/></a>
+            <a target="_blank" href="https://github.com/Altho"><img src="/images/icons/socials/github.svg" alt="github"
+                                                                    width="50"/></a>
+            <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img
+                    src="/images/icons/socials/linkedin.svg" alt="linkedin" width="50"/></a>
         </div>
     </footer>
 </div>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
+
     :root {
         background: #213b4c;
         background-image: linear-gradient(to right bottom, #506cd8, #5560d0, #5a54c6, #5f48bd, #643ab2, #6c38b4, #7436b6, #7c33b8, #8a3ec8, #9849d9, #a654ea, #b45ffb);
 
 
-
-
-
     }
-
-
-
 
 
     .app {
@@ -56,7 +64,7 @@
 
         width: 100%;
 
-        max-width: 64rem;
+        max-width: 75rem;
         margin: 0 auto;
         box-sizing: border-box;
     }
@@ -64,6 +72,7 @@
     img {
         transition: all 0.3s ease-in-out;
     }
+
     img:hover {
         filter: invert(63%) sepia(51%) saturate(6955%) hue-rotate(163deg) brightness(96%) contrast(103%);
     }
@@ -71,7 +80,7 @@
     footer {
         max-width: 64rem;
         width: 100%;
-        padding: 1rem ;
+        padding: 1rem;
         box-sizing: border-box;
         transform: translateX(-50%);
         display: flex;
@@ -87,6 +96,7 @@
         justify-content: space-evenly;
         gap: 15px;
     }
+
     footer a {
         font-weight: bold;
     }

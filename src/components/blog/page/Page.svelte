@@ -2,7 +2,7 @@
     import { fade, blur, fly, slide, scale, crossfade } from "svelte/transition";
 </script>
 
-<div class="page" transition:scale>
+<div class="page" >
     <slot />
 </div>
 
