@@ -7,7 +7,7 @@
     import Comments from "../../../components/blog/comment/Comments.svelte";
     import CommentForm from "../../../components/blog/comment/CommentForm.svelte";
     import PostHeader from "../../../components/blog/page/PostHeader.svelte";
-    import 'highlight.js/styles/Base16/Unikitty-Dark.css';
+    import '../../../styles/code.css';
 
 
     export let data;
