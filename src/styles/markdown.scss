@@ -19,19 +19,22 @@
     }
 
     pre {
-        background: #f4f4f4;
-        border: 1px solid #ddd;
+        background: rgba(255, 255, 255, 0.23);
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        backdrop-filter: blur(6.3px);
+        -webkit-backdrop-filter: blur(6.3px);
         border-radius: 5px;
         border-left: 5px solid #344966;
-        color: #fff;
+        margin-left:50%;
+        transform: translateX(-50%);
         page-break-inside: avoid;
         font-family: monospace;
         font-size: 15px;
         line-height: 1.6;
         margin-bottom: 1.6em;
-        max-width: 100%;
+        width: 90%;
         overflow: auto;
-        padding: 1em 1.5em;
+       // padding: 1em 1.5em;
         display: block;
         word-wrap: break-word;
     }
@@ -39,6 +42,17 @@
     h2 {
         font-family: "Exo 2", sans-serif;
         text-transform: uppercase;
+            margin-left: -16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            padding: 10px 20px;
+            position: relative;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 30%;
+            border-radius: 0 15px 15px 0;
+            box-shadow: rgba(11, 22, 32, 0.63) 3px 3px 6px 0px inset, rgba(19,10,10,0.25) -3px -3px 6px 1px inset;
+
     }
 
     h1 {
@@ -67,4 +81,22 @@
         }
     }
 }
+
+
+    @media (max-width: 768px) {
+        .styled-from-outside {
+            h2 {
+                max-width: 100%;
+                margin-left: 0;
+                border-radius: 0;
+                box-shadow: none;
+                text-align: center;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+
+        }
+    }
+
 

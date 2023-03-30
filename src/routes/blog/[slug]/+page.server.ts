@@ -1,4 +1,4 @@
-import {Actions} from '@sveltejs/kit';
+import type {Actions} from '@sveltejs/kit';
 import {PRIVATE_CAPTCHA_KEY} from '$env/static/private'
 import {PUBLIC_SITEKEY} from '$env/static/public'
 
@@ -43,8 +43,8 @@ export const actions: Actions = {
     const {success} = res;
     if (success && comment && name && comment.length < 250) {
       await supabase
-        .from('comments')
-        .insert({name, comment, blog_id: postId})
+          .from('comments')
+          .insert({name, comment, blog_id: postId})
     } else {
       throw new Error ('error')
     }
@@ -53,4 +53,3 @@ export const actions: Actions = {
   },
 
 };
-
