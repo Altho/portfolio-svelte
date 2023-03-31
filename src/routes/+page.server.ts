@@ -28,7 +28,7 @@ export const actions: Actions = {
 
         await mg.messages.create(domain, {
             from: email as string,
-            to: ["contact@altho.me"],
+            to: ["contact@altho.dev"],
             subject: 'new message from ' + name,
             text: message as string,
         }).catch((err) => {
