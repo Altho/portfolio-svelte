@@ -49,7 +49,6 @@
         {/if}
         {#if isSuccess && gotNotification}
             <Notification messageType="Success">Your message was sent !</Notification>
-
         {/if}
         <div class="contact-infos">
             <div class="input-container">

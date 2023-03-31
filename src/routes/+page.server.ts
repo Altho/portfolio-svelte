@@ -3,6 +3,11 @@ import Mailgun from 'mailgun.js'
 import { PRIVATE_MAILGUN_KEY } from '$env/static/private'
 import type {Actions} from "@sveltejs/kit";
 const mailgun = new Mailgun(formData);
+import type { LayoutServerLoad } from './$types';
+
+export const load: LayoutServerLoad = async ({ url: { pathname } }) => {
+    return { pathname };
+};
 
 
 

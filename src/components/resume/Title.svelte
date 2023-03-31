@@ -19,7 +19,8 @@
       position: relative;
         align-items: center;
         justify-content: space-between;
-      max-width: 50%;
+      width: fit-content;
+      padding-right: 60px;
       border-radius: 0 15px 15px 0;
       box-shadow: rgba(11, 22, 32, 0.63) 3px 3px 6px 0px inset, rgba(19,10,10,0.25) -3px -3px 6px 1px inset;
 
