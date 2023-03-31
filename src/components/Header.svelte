@@ -1,10 +1,20 @@
 <script>
     import {page} from '$app/stores';
+    import {isOverlay} from "$lib/stores.ts";
 
     let y = 0;
+
+    const handleClick = () => {
+        console.log('clicked')
+        isOverlay.set(true)
+        console.log($isOverlay)
+    }
+
 </script>
 
 <svelte:window bind:scrollY={y}/>
+
+
 
 <header>
 
@@ -20,9 +30,9 @@
             <li aria-current={$page.url.pathname.startsWith('/blog') ? 'page' : undefined}>
                 <a href="/blog">Blog</a>
             </li>
-            <li aria-current={$page.url.pathname.includes('/#form') ? 'page' : undefined}>
-                <a href="/#form">Contact</a>
-            </li>
+
+                <button class="contact" on:click={handleClick}>Contact</button>
+
         </ul>
 
     </nav>
@@ -49,6 +59,10 @@
       color: black;
     }
 
+    .contact {
+        color: black;
+    }
+
     li[aria-current='page'] {
       border: black 2px solid;
     }
@@ -62,6 +76,32 @@
     justify-content: center;
     transition: all 0.2s ease-in-out;
     color: #fff;
+  }
+
+  .contact {
+    all: unset;
+    cursor: pointer;
+    position: fixed;
+    right: 25px;
+    top: 10px;
+    padding: 5px;
+    text-transform: uppercase;
+    align-items: center;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: linear-gradient(to right bottom, #506cd8, #5560d0, #5a54c6, #5f48bd, #643ab2, #6c38b4, #7436b6, #7c33b8, #8a3ec8, #9849d9, #a654ea, #b45ffb);
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+      padding: 5px;
+      color: white;
+      border-radius: 5px;
+      background-size: 140%;
+      border: 2px solid #600978;
+    }
+
   }
 
   svg {

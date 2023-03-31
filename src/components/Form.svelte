@@ -3,6 +3,7 @@
     import {enhance} from '$app/forms';
     import {fade, fly} from 'svelte/transition';
     import Notification from "./notification/Notification.svelte";
+    import {isOverlay} from "../lib/stores";
 
     let name;
     let email;
@@ -23,8 +24,9 @@
 </script>
 <section>
     <Title>CONTACT</Title>
+    <p>Please feel free to contact me if you have any inquiry, I'll be back to you shortly</p>
 
-    <form method="post" on:submit={() => {isLoading=true}} use:enhance={({form, data, action, cancel}) => {
+    <form method="post" action="/?/sendMail" on:submit={() => {isLoading=true; }} use:enhance={({form, data, action, cancel}) => {
 
     return async ({ result }) => {
         isError = false;
@@ -34,6 +36,8 @@
             isLoading = false;
             isSuccess = true;
             form.reset();
+
+
 
         } else {
             setUnmount();
@@ -62,7 +66,7 @@
         </div>
         <div id="form" class="input-container">
             <label for="message">Message <span>*</span> :</label>
-            <textarea name="message" id="message" required bind:value={message}></textarea>
+            <textarea  placeholder="your message..." name="message" id="message" required bind:value={message}></textarea>
         </div>
         <button type="submit">
             {#if isLoading}
@@ -81,6 +85,7 @@
 
   section {
     position: relative;
+    width:80%;
   }
 
 
@@ -94,31 +99,41 @@
   }
 
   input {
-    padding: 5px;
     all: unset;
+    padding: 5px;
     width: 100%;
+    box-sizing: border-box;
     height: 30px;
     border-radius: 5px;
     border: 2px solid #ffffff;
     transition: all 0.2s ease-in-out;
     margin-bottom: 10px;
 
+
     &:focus {
-      background-color: #1C3041;
+      border: transparent;
+      box-shadow: rgb(0, 0, 0) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
+
     }
   }
 
   textarea {
     all: unset;
     width: 100%;
-    height: 100px;
+    height: 200px;
     margin-bottom: 20px;
     border-radius: 5px;
-    border: 2px solid #1C3041;
+    border: 2px solid #ffffff;
     transition: all 0.2s ease-in-out;
+    padding: 20px;
+    box-sizing: border-box;
 
     &:focus {
-      background-color: #1C3041;
+      //background: rgb(0,6,36);
+      border: transparent;
+      box-shadow: rgb(0, 0, 0) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
+
+
     }
   }
 
@@ -137,13 +152,21 @@
     gap: 10px;
   }
 
+  p {
+
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
 
 
   button {
+    all: unset;
     background-color: transparent;
-    border: 2px solid #0D1821;
+    text-align: center;
     width: 200px;
-    color: #0D1821;
+    color: white;
     border-radius: 5px;
     padding: 10px 20px;
     transition: all 0.2s ease-in-out;
@@ -151,15 +174,16 @@
     text-transform: uppercase;
 
     &:hover {
-      background-color: #0D1821;
-      color: #344966;
-      border: 2px solid #0D1821;
+      background: transparent;
       cursor: pointer;
+      border: 1px solid #8e2a9e;
+
     }
 
     &:active {
       transform: translate(2px, 2px);
       box-shadow: rgb(0, 0, 0) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
+      border: none;
     }
   }
 

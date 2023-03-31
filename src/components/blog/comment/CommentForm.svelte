@@ -71,7 +71,7 @@
 
 <style lang="scss">
   form {
-    color: black;
+    color: white;
     padding: 10px;
     border-radius: 5px;
     display: flex;
@@ -89,6 +89,9 @@
     padding: 5px;
     all: unset;
     width: 100%;
+    color:black;
+    padding: 5px;
+    box-sizing: border-box;
     height: 30px;
     border-radius: 5px;
     background-color: white;
@@ -102,7 +105,10 @@
   textarea {
     all: unset;
     width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
     height: 100px;
+    color:black;
     margin-bottom: 20px;
     border-radius: 5px;
     background-color: white;

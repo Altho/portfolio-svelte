@@ -1,9 +1,13 @@
 <script lang="ts">
   import Header from '../components/Header.svelte';
+  import {IconX} from '@tabler/icons-svelte'
 
   const year = new Date().getFullYear()
+  import {isOverlay} from "../lib/stores";
+  import {fade} from "svelte/transition";
   import PageTransition from "../components/PageTransition.svelte";
   import type {LayoutServerData} from './$types';
+  import Form from "../components/Form.svelte";
 
   export let data: LayoutServerData;
 
@@ -11,6 +15,14 @@
 
 
 <div class="app">
+    {#if $isOverlay}
+        <div on:click={() => isOverlay.set(false)} class="overlay"></div>
+        <div transition:fade class="form-container">
+            <button on:click={() => isOverlay.set(false)} class="close"><IconX/></button>
+            <Form />
+        </div>
+        {/if}
+
     <Header/>
     <main>
         <PageTransition pathname={data.pathname}>
@@ -22,7 +34,7 @@
 
 
     <footer>
-        <div class="footer-container"><p>© {year} Altho </p></div>
+        <div  class="footer-container"><p>© {year} Altho </p></div>
         <div class="socials">
             <a target="_blank" href="https://www.linkedin.com/in/alan-thomas-813334203/"><img width="50"
                                                                                               src="/images/icons/socials/mastodon.svg"
@@ -88,6 +100,47 @@
         position: relative;
         justify-content: space-between;
         bottom: 0;
+    }
+
+    .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+
+    }
+
+
+
+    .form-container {
+        background: rgb(0,6,36);
+        border: transparent;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(45deg, rgba(0,6,36,1) 0%, rgba(60,9,121,1) 35%, rgba(214,0,255,1) 100%);
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        position: fixed;
+        width: 80vw;
+        padding: 20px;
+        height: 80vh;
+        left: 50%;
+        top: 50%;
+        z-index: 100;
+        transform: translate(-50%, -50%);
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 99;
     }
 
 

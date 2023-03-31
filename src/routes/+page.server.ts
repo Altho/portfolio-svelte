@@ -15,7 +15,7 @@ const mg = mailgun.client({ username: 'api', key: PRIVATE_MAILGUN_KEY });
 const domain = 'sandboxefb44881421d43f7bf374b83dbfc5646.mailgun.org'
 
 export const actions: Actions = {
-    default: async ({request}) => {
+    sendMail: async ({request}) => {
         const data = await request.formData();
 
         const email = data.get('email');
