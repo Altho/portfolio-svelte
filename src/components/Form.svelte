@@ -99,7 +99,7 @@
     width: 100%;
     height: 30px;
     border-radius: 5px;
-    border: 2px solid #1C3041;
+    border: 2px solid #ffffff;
     transition: all 0.2s ease-in-out;
     margin-bottom: 10px;
 
