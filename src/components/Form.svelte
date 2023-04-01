@@ -15,8 +15,6 @@
 
     const setUnmount = () => {
         gotNotification = true;
-        isOverlay.set(false);
-        console.log($isOverlay)
         setTimeout(() => {
             gotNotification = false
         }, 3000)

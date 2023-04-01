@@ -122,13 +122,15 @@
         border: transparent;
         border-radius: 15px;
         display: flex;
+        padding: -20px 20px 20px 20px;
         justify-content: center;
         background: linear-gradient(45deg, rgba(0,6,36,1) 0%, rgba(60,9,121,1) 35%, rgba(214,0,255,1) 100%);
         box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
         position: fixed;
+        box-sizing: border-box;
         width: 80vw;
-        padding: 20px;
-        //height: 80%;
+        overflow: scroll;
+        height: 80vh;
         left: 50%;
         top: 50%;
         z-index: 100;
