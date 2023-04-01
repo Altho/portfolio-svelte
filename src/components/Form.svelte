@@ -15,6 +15,8 @@
 
     const setUnmount = () => {
         gotNotification = true;
+        isOverlay.set(false);
+        console.log($isOverlay)
         setTimeout(() => {
             gotNotification = false
         }, 3000)
@@ -36,6 +38,7 @@
             isLoading = false;
             isSuccess = true;
             form.reset();
+
 
 
 
@@ -166,6 +169,7 @@
     background-color: transparent;
     text-align: center;
     width: 200px;
+    margin-bottom: 20px;
     color: white;
     border-radius: 5px;
     padding: 10px 20px;

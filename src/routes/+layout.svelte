@@ -9,6 +9,8 @@
   import type {LayoutServerData} from './$types';
   import Form from "../components/Form.svelte";
 
+
+
   export let data: LayoutServerData;
 
 </script>
@@ -16,7 +18,7 @@
 
 <div class="app">
     {#if $isOverlay}
-        <div on:click={() => isOverlay.set(false)} class="overlay"></div>
+        <div transition:fade on:click={() => isOverlay.set(false)} class="overlay"></div>
         <div transition:fade class="form-container">
             <button on:click={() => isOverlay.set(false)} class="close"><IconX/></button>
             <Form />
@@ -126,7 +128,7 @@
         position: fixed;
         width: 80vw;
         padding: 20px;
-        height: 80vh;
+        //height: 80%;
         left: 50%;
         top: 50%;
         z-index: 100;
