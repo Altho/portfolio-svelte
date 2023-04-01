@@ -46,7 +46,7 @@
         </div>
         <div class="down">
             <div class="text">
-                Content: {prof.content}
+               {prof.content}
             </div>
             {#if $width > 600 }
                 <div class="image-container">
